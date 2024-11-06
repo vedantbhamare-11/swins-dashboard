@@ -4,7 +4,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Users, FileText, Bell, Settings, Crown } from "lucide-react";
+import { Home, Users, FileText, Bell, Settings, Crown, Building2 } from "lucide-react";
 
 const Sidebar: React.FC = () => {
   const pathname = usePathname();
@@ -17,13 +17,22 @@ const Sidebar: React.FC = () => {
       icon: <FileText />,
       path: "/content-moderation",
     },
-    { name: "Leaderboard Management", icon: <Crown />, path: "/leader-management" },
+    {
+      name: "Leaderboard Management",
+      icon: <Crown />,
+      path: "/leader-management",
+    },
+    {
+      name: "Organization Management",
+      icon: <Building2 />,
+      path: "/organization-management",
+    },
     { name: "Notifications", icon: <Bell />, path: "/notifications" },
     { name: "Settings", icon: <Settings />, path: "/settings" },
   ];
 
   return (
-    <aside className="bg-white text-gray-700 h-full w-80 p-5 flex flex-col border-r">
+    <aside className="bg-white text-gray-700 h-full w-[400px] p-5 flex flex-col border-r">
       <nav className="flex flex-col gap-4">
         {navLinks.map((link, index) => (
           <Link key={index} href={link.path} legacyBehavior>
