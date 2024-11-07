@@ -40,7 +40,7 @@ const Sidebar: React.FC = () => {
               className={`flex items-center gap-4 p-2 rounded-md transition-colors duration-150 ${
                 pathname === link.path
                   ? "bg-black text-white"
-                  : "text-gray-700 hover:text-blue-600"
+                  : "text-gray-700"
               }`}
             >
               <span className="text-xl">{link.icon}</span>
