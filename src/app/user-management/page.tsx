@@ -12,14 +12,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Plus } from "lucide-react";
+import { Plus, SlidersHorizontal } from "lucide-react"; // Import the filter icon
 import AddUserModal from "@/components/AddUserModal";
 import UserTable from "@/components/UserTable";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { addUser } from "@/redux/slices/userManagementSlice";
 import type { User } from "@/redux/slices/userManagementSlice";
-
 
 const UserManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState("all-members");
@@ -92,47 +91,55 @@ const UserManagement: React.FC = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="p-2 border rounded-md focus:outline-none focus:ring-2 w-full sm:w-60"
               />
-              <Button
-                onClick={toggleModal}
-                className="flex items-center gap-2 bg-[#1E1E1E] text-white p-2 rounded-md w-full sm:w-auto justify-center"
-              >
-                <Plus className="w-4 h-4" />
-                Add Employee
+              <Button variant={"outline"} className="flex w-10 items-center gap-2 p-2 rounded-md">
+                <SlidersHorizontal className="w-4 h-4" />
               </Button>
             </div>
           </div>
+
           <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
             <CardContent>
-              <NavigationMenu className="bg-[#FDF9FF] p-2 rounded">
-                <NavigationMenuList className="flex gap-2 sm:gap-4 flex-wrap">
-                  <NavLink
-                    href="#"
-                    isActive={activeTab === "all-members"}
-                    onClick={() => setActiveTab("all-members")}
-                  >
-                    All Members
-                  </NavLink>
-                  <NavLink
-                    href="#"
-                    isActive={activeTab === "employee"}
-                    onClick={() => setActiveTab("employee")}
-                  >
-                    Employee
-                  </NavLink>
-                  <NavLink
-                    href="#"
-                    isActive={activeTab === "admin"}
-                    onClick={() => setActiveTab("admin")}
-                  >
-                    Admin
-                  </NavLink>
-                </NavigationMenuList>
-              </NavigationMenu>
+              <div className="flex justify-between items-center mb-4">
+                <NavigationMenu className="bg-[#FDF9FF] p-2 rounded">
+                  <NavigationMenuList className="flex gap-2 sm:gap-4 flex-wrap">
+                    <NavLink
+                      href="#"
+                      isActive={activeTab === "all-members"}
+                      onClick={() => setActiveTab("all-members")}
+                    >
+                      All Members
+                    </NavLink>
+                    <NavLink
+                      href="#"
+                      isActive={activeTab === "employee"}
+                      onClick={() => setActiveTab("employee")}
+                    >
+                      Employee
+                    </NavLink>
+                    <NavLink
+                      href="#"
+                      isActive={activeTab === "admin"}
+                      onClick={() => setActiveTab("admin")}
+                    >
+                      Admin
+                    </NavLink>
+                  </NavigationMenuList>
+                </NavigationMenu>
+                <Button
+                  onClick={toggleModal}
+                  className="flex items-center gap-2 bg-[#1E1E1E] text-white p-2 rounded-md"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Employee
+                </Button>
+              </div>
+
               <div className="overflow-x-auto">
                 <UserTable users={filteredUsers} />
               </div>
             </CardContent>
           </Card>
+
           <AddUserModal
             showModal={showModal}
             toggleModal={toggleModal}
