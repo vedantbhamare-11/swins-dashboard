@@ -2,9 +2,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import NavLink from "@/components/NavLink";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
+import NavLink from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus, SlidersHorizontal } from "lucide-react";
@@ -12,14 +12,26 @@ import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import OrganizationTable from "@/components/OrganizationTable";
 import AddOrganizationModal from "@/components/AddOrganizationModal";
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@radix-ui/react-navigation-menu";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+} from "@radix-ui/react-navigation-menu";
+import PostPreferenceDialog from "@/components/PostPreferenceDialog";
+import { updatePostPreference } from "@/redux/slices/organizationManagementSlice";
 
 const OrganizationManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState("all-organizations");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const organizations = useSelector((state: RootState) => state.organizationManagement.organizations);
+  const [isPostPreferenceDialogOpen, setIsPostPreferenceDialogOpen] =
+    useState(false);
+  const [selectedOrg, setSelectedOrg] = useState<any>(null);
+  const organizations = useSelector(
+    (state: RootState) => state.organizationManagement.organizations
+  );
 
-  // Function to get the heading text based on active tab
+  const dispatch = useDispatch();
+
   const getHeadingText = () => {
     switch (activeTab) {
       case "all-organizations":
@@ -36,10 +48,41 @@ const OrganizationManagement: React.FC = () => {
   const handleModalOpen = () => setIsModalOpen(true);
   const handleModalClose = () => setIsModalOpen(false);
 
+  const handlePostPreferenceOpen = (org: any) => {
+    setSelectedOrg(org); // Set the selected organization for post preference
+    setIsPostPreferenceDialogOpen(true);
+  };
+
+  const handlePostPreferenceClose = () => setIsPostPreferenceDialogOpen(false);
+
+  const handlePostPreferenceSave = (
+    preference: "Admin Approved" | "Post Publicly"
+  ) => {
+    if (selectedOrg) {
+      // Dispatch action to update post preference in Redux
+      dispatch(
+        updatePostPreference({
+          organizationName: selectedOrg.name,
+          postType: preference,
+        })
+      );
+      setIsPostPreferenceDialogOpen(false);
+    }
+  };
+
+  const handleShowDetails = () => {
+    console.log("Showing details...");
+  };
+
+  const handleSuspend = () => {
+    console.log("Suspending organization...");
+  };
+
   const filteredOrganizations = organizations.filter((org) => {
     if (activeTab === "all-organizations") return true;
     if (activeTab === "post-publicly") return org.postType === "Post Publicly";
-    if (activeTab === "admin-approved") return org.postType === "Admin Approved";
+    if (activeTab === "admin-approved")
+      return org.postType === "Admin Approved";
     return true;
   });
 
@@ -91,19 +134,40 @@ const OrganizationManagement: React.FC = () => {
 
           <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
             <div className="flex items-center justify-between mb-2">
-              <h1 className="text-xl md:text-2xl font-bold">{getHeadingText()}</h1>
-              <Button onClick={handleModalOpen} className="flex items-center gap-2 bg-[#1E1E1E] text-white p-2 rounded-md">
+              <h1 className="text-xl md:text-2xl font-bold">
+                {getHeadingText()}
+              </h1>
+              <Button
+                onClick={handleModalOpen}
+                className="flex items-center gap-2 bg-[#1E1E1E] text-white p-2 rounded-md"
+              >
                 <Plus className="w-4 h-4" />
                 Add Organization
               </Button>
             </div>
-            <p className="text-gray-500 text-sm mb-4">Empowering Connections, Building Community</p>
+            <p className="text-gray-500 text-sm mb-4">
+              Empowering Connections, Building Community
+            </p>
             <CardContent>
-              <OrganizationTable organizations={filteredOrganizations} />
+              <OrganizationTable
+                organizations={filteredOrganizations}
+                onShowDetails={handleShowDetails}
+                onSuspend={handleSuspend}
+                onPostPreference={handlePostPreferenceOpen}
+              />
             </CardContent>
           </Card>
 
-          <AddOrganizationModal isOpen={isModalOpen} onClose={handleModalClose} />
+          <AddOrganizationModal
+            isOpen={isModalOpen}
+            onClose={handleModalClose}
+          />
+
+          <PostPreferenceDialog
+            isOpen={isPostPreferenceDialogOpen}
+            onClose={handlePostPreferenceClose}
+            onSave={handlePostPreferenceSave}
+          />
         </div>
       </div>
     </div>

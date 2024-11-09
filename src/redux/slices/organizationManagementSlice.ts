@@ -1,7 +1,7 @@
 // ./redux/slices/organizationManagementSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Organization {
+export interface Organization {
   name: string;
   username: string;
   email: string;
@@ -54,8 +54,23 @@ const organizationManagementSlice = createSlice({
     addOrganization: (state, action: PayloadAction<Organization>) => {
       state.organizations.push(action.payload);
     },
+    updatePostPreference: (
+      state,
+      action: PayloadAction<{
+        organizationName: string;
+        postType: "Admin Approved" | "Post Publicly";
+      }>
+    ) => {
+      const org = state.organizations.find(
+        (org) => org.name === action.payload.organizationName
+      );
+      if (org) {
+        org.postType = action.payload.postType;
+      }
+    },
   },
 });
 
-export const { setOrganizations, addOrganization } = organizationManagementSlice.actions;
+export const { setOrganizations, addOrganization, updatePostPreference } =
+  organizationManagementSlice.actions;
 export default organizationManagementSlice.reducer;

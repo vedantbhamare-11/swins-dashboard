@@ -130,7 +130,7 @@ const UserManagement: React.FC = () => {
                   className="flex items-center gap-2 bg-[#1E1E1E] text-white p-2 rounded-md"
                 >
                   <Plus className="w-4 h-4" />
-                  Add Employee
+                  Add User
                 </Button>
               </div>
 
