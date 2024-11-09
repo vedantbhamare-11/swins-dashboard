@@ -1,4 +1,3 @@
-// ./src/components/OrganizationTable.tsx
 "use client";
 
 import React from "react";
@@ -82,9 +81,9 @@ const OrganizationTable: React.FC<OrganizationTableProps> = ({
             <TableCell>
               {/* Ellipsis icon button for actions */}
               <OrganizationActionsPopover
-                onShowDetails={() => onShowDetails(org)}
-                onPostPreference={() => handlePostPreference(org)}
-                onSuspend={() => onSuspend(org)}
+                onShowDetails={() => onShowDetails(org)} // Passing full organization details
+                onPostPreference={() => handlePostPreference(org)} // Passing post preference handler
+                onSuspend={() => onSuspend(org)} // Passing suspend handler
               />
             </TableCell>
           </TableRow>

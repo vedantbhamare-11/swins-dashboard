@@ -130,21 +130,30 @@ const AddOrganizationModal: React.FC<AddOrganizationModalProps> = ({ isOpen, onC
         setCurrentStep(3);
       }
     } else {
+      // Dispatch the addOrganization action with all the required fields
       dispatch(
         addOrganization({
           name: orgName,
-          username: adminName,
-          email: adminEmail,
+          username: adminName, // admin name from step 2
+          email: adminEmail, // admin email from step 2
           type: orgType,
           website,
-          postType
+          address, // address from step 1
+          adminName, // admin name from step 2
+          jobTitle, // job title from step 2
+          orgDescription, // organization description from step 2
+          numEmployees, // number of employees from step 2
+          foundedDate, // founded date from step 2
+          logo: selectedImage, // logo from step 1
+          postType,
+          adminEmail: ""
         })
       );
       onClose();
       resetForm(); 
     }
   };
-
+  
   if (!isOpen) return null;
 
   return (

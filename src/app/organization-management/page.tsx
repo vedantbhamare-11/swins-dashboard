@@ -1,4 +1,3 @@
-// ./src/app/organization-management/page.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -18,6 +17,7 @@ import {
   NavigationMenuItem,
 } from "@radix-ui/react-navigation-menu";
 import PostPreferenceDialog from "@/components/PostPreferenceDialog";
+import OrganizationDetailsModal from "@/components/OrganizationDetailsModal";
 import { updatePostPreference } from "@/redux/slices/organizationManagementSlice";
 
 const OrganizationManagement: React.FC = () => {
@@ -25,13 +25,16 @@ const OrganizationManagement: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPostPreferenceDialogOpen, setIsPostPreferenceDialogOpen] =
     useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [selectedOrg, setSelectedOrg] = useState<any>(null);
+
   const organizations = useSelector(
     (state: RootState) => state.organizationManagement.organizations
   );
 
   const dispatch = useDispatch();
 
+  // Function to get the heading text based on active tab
   const getHeadingText = () => {
     switch (activeTab) {
       case "all-organizations":
@@ -50,7 +53,7 @@ const OrganizationManagement: React.FC = () => {
 
   const handlePostPreferenceOpen = (org: any) => {
     setSelectedOrg(org); // Set the selected organization for post preference
-    setIsPostPreferenceDialogOpen(true);
+    setIsPostPreferenceDialogOpen(true); // Open the Post Preference Dialog
   };
 
   const handlePostPreferenceClose = () => setIsPostPreferenceDialogOpen(false);
@@ -59,7 +62,6 @@ const OrganizationManagement: React.FC = () => {
     preference: "Admin Approved" | "Post Publicly"
   ) => {
     if (selectedOrg) {
-      // Dispatch action to update post preference in Redux
       dispatch(
         updatePostPreference({
           organizationName: selectedOrg.name,
@@ -70,13 +72,12 @@ const OrganizationManagement: React.FC = () => {
     }
   };
 
-  const handleShowDetails = () => {
-    console.log("Showing details...");
+  const handleShowDetails = (org: any) => {
+    setSelectedOrg(org); // Set the selected organization for details
+    setIsDetailsModalOpen(true); // Open the details modal
   };
 
-  const handleSuspend = () => {
-    console.log("Suspending organization...");
-  };
+  const handleDetailsModalClose = () => setIsDetailsModalOpen(false);
 
   const filteredOrganizations = organizations.filter((org) => {
     if (activeTab === "all-organizations") return true;
@@ -150,9 +151,9 @@ const OrganizationManagement: React.FC = () => {
             </p>
             <CardContent>
               <OrganizationTable
-                organizations={filteredOrganizations}
+                organizations={filteredOrganizations} // Pass organizations as a prop
                 onShowDetails={handleShowDetails}
-                onSuspend={handleSuspend}
+                onSuspend={() => {}}
                 onPostPreference={handlePostPreferenceOpen}
               />
             </CardContent>
@@ -163,11 +164,21 @@ const OrganizationManagement: React.FC = () => {
             onClose={handleModalClose}
           />
 
+          {/* Post Preference Dialog */}
           <PostPreferenceDialog
             isOpen={isPostPreferenceDialogOpen}
             onClose={handlePostPreferenceClose}
             onSave={handlePostPreferenceSave}
           />
+
+          {/* Organization Details Modal */}
+          {selectedOrg && (
+            <OrganizationDetailsModal
+              isOpen={isDetailsModalOpen}
+              onClose={handleDetailsModalClose}
+              selectedOrg={selectedOrg} // Pass selectedOrg here
+            />
+          )}
         </div>
       </div>
     </div>
