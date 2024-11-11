@@ -10,12 +10,16 @@ const Sidebar: React.FC = () => {
   const pathname = usePathname();
 
   const navLinks = [
-    { name: "Dashboard", icon: <Home />, path: "/dashboard" },
-    { name: "User Management", icon: <Users />, path: "/user-management" },
+    { name: "Dashboard", 
+      icon: <Home />, 
+      path: "/dashboard" },
+    { name: "User Management", 
+      icon: <Users />, 
+      path: "/user-management" },
     {
       name: "Feedback Management",
       icon: <FileText />,
-      path: "/content-moderation",
+      path: "/feedback-management",
     },
     {
       name: "Leaderboard Management",

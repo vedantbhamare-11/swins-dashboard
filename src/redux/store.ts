@@ -4,6 +4,8 @@ import leaderboardReducer from "./slices/leaderboardSlice";
 import userManagementReducer from "./slices/userManagementSlice";
 import dashboardReducer from "./slices/dashboardSlice"; 
 import organizationManagementReducer from "./slices/organizationManagementSlice"
+import feedbackManagementReducer from "./slices/feedbackManagementSlice"; // Import the new slice
+
 
 const store = configureStore({
   reducer: {
@@ -11,6 +13,8 @@ const store = configureStore({
     userManagement: userManagementReducer,
     dashboard: dashboardReducer, 
     organizationManagement: organizationManagementReducer,
+    feedbackManagement: feedbackManagementReducer, // Add feedbackManagement reducer here
+
   },
 });
 
