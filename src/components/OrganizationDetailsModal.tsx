@@ -282,10 +282,10 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
         </div>
 
         <DialogFooter className="mt-4 flex justify-between">
-          <Button variant="outline" onClick={handleDiscard}>
+          <Button className="w-1/2" variant="outline" onClick={handleDiscard}>
             Discard Changes
           </Button>
-          <Button onClick={handleSave}>Save Changes</Button>
+          <Button className="w-1/2" onClick={handleSave}>Save Changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
