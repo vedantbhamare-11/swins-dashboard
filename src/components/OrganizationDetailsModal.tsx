@@ -120,7 +120,7 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl">
+      <DialogContent className="max-w-3xl h-auto">
         <div className="relative flex gap-8">
           <div className="w-1/2 space-y-4">
             <div>
@@ -281,7 +281,7 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
           </div>
         </div>
 
-        <DialogFooter className="mt-4 flex justify-between">
+        <DialogFooter className="mt-[-5%] flex justify-between">
           <Button className="w-1/2" variant="outline" onClick={handleDiscard}>
             Discard Changes
           </Button>
