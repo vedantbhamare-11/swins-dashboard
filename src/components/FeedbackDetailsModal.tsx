@@ -23,6 +23,74 @@ interface FeedbackDetailsModalProps {
 const FeedbackDetailsModal: React.FC<FeedbackDetailsModalProps> = ({ isOpen, onClose, feedback }) => {
   if (!feedback) return null;
 
+  // Render buttons based on the feedback status
+  const renderButtons = () => {
+    if (feedback.status === "Pending") {
+      return (
+        <>
+          <Button
+            className="w-1/3 bg-[#C5ECFF] text-[#006A9F] hover:bg-[#A3D6E9]"
+            onClick={() => alert("Feedback flagged")}
+          >
+            Flag
+          </Button>
+          <Button
+            className="w-1/3 bg-[#FFD8D8] text-[#EF5050] hover:bg-[#F7B5B5]"
+            onClick={() => alert("Feedback rejected")}
+          >
+            Reject
+          </Button>
+          <Button
+            className="w-1/3 text-[#327222] bg-[#E2F9D6] hover:bg-[#C4E7A0]"
+            onClick={() => alert("Feedback accepted")}
+          >
+            Accept
+          </Button>
+        </>
+      );
+    }
+
+    if (feedback.status === "Accepted") {
+      return (
+        <>
+          <Button
+            className="w-1/2 bg-[#C5ECFF] text-[#006A9F] hover:bg-[#A3D6E9]"
+            onClick={() => alert("Feedback flagged")}
+          >
+            Flag
+          </Button>
+          <Button
+            className="w-1/2 bg-[#FFD8D8] text-[#EF5050] hover:bg-[#F7B5B5]"
+            onClick={() => alert("Feedback rejected")}
+          >
+            Reject
+          </Button>
+        </>
+      );
+    }
+
+    if (feedback.status === "Flagged") {
+      return (
+        <>
+          <Button
+            className="w-1/2 text-[#327222] bg-[#E2F9D6] hover:bg-[#C4E7A0]"
+            onClick={() => alert("Feedback accepted")}
+          >
+            Accept
+          </Button>
+          <Button
+            className="w-1/2 bg-[#FFD8D8] text-[#EF5050] hover:bg-[#F7B5B5]"
+            onClick={() => alert("Feedback rejected")}
+          >
+            Reject
+          </Button>
+        </>
+      );
+    }
+
+    return null; // If no matching status, return nothing
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-lg p-4">
@@ -51,18 +119,7 @@ const FeedbackDetailsModal: React.FC<FeedbackDetailsModalProps> = ({ isOpen, onC
         </div>
 
         <DialogFooter>
-          <Button
-            className="w-1/2 bg-[#C5ECFF] text-[#006A9F] hover:bg-[#A3D6E9]"
-            onClick={() => alert("Feedback flagged")}
-          >
-            Flag
-          </Button>
-          <Button
-            className="w-1/2 bg-[#FFD8D8] text-[#EF5050] hover:bg-[#F7B5B5]"
-            onClick={() => alert("Feedback rejected")}
-          >
-            Reject
-          </Button>
+          {renderButtons()}
         </DialogFooter>
       </DialogContent>
     </Dialog>
