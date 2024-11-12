@@ -4,7 +4,9 @@ import leaderboardReducer from "./slices/leaderboardSlice";
 import userManagementReducer from "./slices/userManagementSlice";
 import dashboardReducer from "./slices/dashboardSlice"; 
 import organizationManagementReducer from "./slices/organizationManagementSlice"
-import feedbackManagementReducer from "./slices/feedbackManagementSlice"; // Import the new slice
+import feedbackManagementReducer from "./slices/feedbackManagementSlice"; 
+import notificationReducer from "./slices/notificationSlice";
+
 
 
 const store = configureStore({
@@ -13,7 +15,8 @@ const store = configureStore({
     userManagement: userManagementReducer,
     dashboard: dashboardReducer, 
     organizationManagement: organizationManagementReducer,
-    feedbackManagement: feedbackManagementReducer, // Add feedbackManagement reducer here
+    feedbackManagement: feedbackManagementReducer, 
+    notifications: notificationReducer,
 
   },
 });

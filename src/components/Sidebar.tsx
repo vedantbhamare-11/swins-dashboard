@@ -31,8 +31,14 @@ const Sidebar: React.FC = () => {
       icon: <Building2 />,
       path: "/organization-management",
     },
-    { name: "Notifications", icon: <Bell />, path: "/notifications" },
-    { name: "Settings", icon: <Settings />, path: "/settings" },
+    { name: "Notifications", 
+      icon: <Bell />, 
+      path: "/notifications" 
+    },
+    { name: "Settings", 
+      icon: <Settings />, 
+      path: "/settings" 
+    },
   ];
 
   return (
