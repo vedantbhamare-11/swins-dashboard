@@ -1,36 +1,48 @@
-// ./src/components/DashboardCard.tsx
-import React from 'react';
+import React from "react";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"; // Ensure the import path is correct
+} from "@/components/ui/card";
+import { Building2, Building, PanelsTopLeft } from "lucide-react";
 
 interface DashboardCardProps {
   title: string;
   description: number;
-  footerText: string;
 }
+const DashboardCard: React.FC<DashboardCardProps> = ({
+  title,
+  description,
+}) => {
+  const getIcon = (title: string) => {
+    switch (title) {
+      case "Total Organizations":
+        return <Building2 className="text-gray-500" size={15} />;
+      case "Active Organizations":
+        return <Building className="text-gray-500" size={15} />;
+      case "Feedback Received":
+        return <PanelsTopLeft className="text-gray-500" size={15} />;
+      default:
+        return null;
+    }
+  };
 
-const DashboardCard: React.FC<DashboardCardProps> = ({ title, description, footerText }) => {
   return (
-    <Card className=' bg-white shadow-md'>
-      <CardHeader className="p-2 mx-6 mt-4">
+    <Card className="bg-white relative w-1/3">
+      <CardHeader className="p-2 mx-2 mt-1">
         <CardTitle className="text-[#09090B] text-[16px] font-normal">
           {title}
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-2 mx-6">
-        <CardDescription className="text-[#09090B] font-bold text-[38px] mb-1">
+      <CardContent className="p-2 mx-2">
+        <CardDescription className="text-[#09090B] font-bold text-[40px]">
           {description}
         </CardDescription>
       </CardContent>
-      <CardFooter className="p-0  mx-6 mt-[-15px] mb-6">
-        <p className="text-[#09090B] text-[12px] font-normal">{footerText}</p>
-      </CardFooter>
+
+      <div className="absolute top-4 right-4">{getIcon(title)}</div>
     </Card>
   );
 };
