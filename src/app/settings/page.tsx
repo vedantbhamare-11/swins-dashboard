@@ -1,0 +1,141 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu";
+import NavLink from "@/components/NavLink";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/redux/store";
+import { updateAdminDetail, updateProfilePic } from "@/redux/slices/adminDetailsSlice";
+import AccountSettings from "@/components/AccountSettings";
+import NavigationTabs from "@/components/NavigationTabs"; // Import the new NavigationTabs
+
+
+const Settings: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("account");
+
+  const { fullName, email, role, timeZone, profilePic } = useSelector(
+    (state: RootState) => state.adminDetails
+  );
+  const dispatch = useDispatch();
+
+  // Local state for form inputs (auto-fill from Redux)
+  const [formData, setFormData] = useState({
+    fullName,
+    email,
+    role,
+    timeZone, // Ensure timeZone is included here
+  });
+
+  // Auto-fill form data on component mount
+  useEffect(() => {
+    setFormData({
+      fullName,
+      email,
+      role,
+      timeZone, // Update formData with the current timeZone from Redux
+    });
+  }, [fullName, email, role, timeZone]);
+
+  // Handle input change for text fields
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    dispatch(updateAdminDetail({ key: name as keyof typeof formData, value }));
+  };
+
+  // Handle select changes for time zone
+  const handleSelectChange = (value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      timeZone: value,
+    }));
+    dispatch(updateAdminDetail({ key: "timeZone", value }));
+  };
+
+  // Handle file change for profile picture upload
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        dispatch(updateProfilePic(reader.result as string));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handle save button click
+  const handleSaveSettings = () => {
+    console.log("Settings Saved", formData);
+  };
+  const tabs = [
+    { label: "Account", value: "account" },
+    { label: "Notification", value: "notification" },
+    { label: "Security", value: "security" },
+    { label: "Appearance", value: "appearance" },
+  ];
+
+  return (
+    <div className="flex flex-col flex-1">
+      <Header />
+      <div className="flex h-screen">
+        <Sidebar />
+        <div className="w-full p-4 md:p-6 bg-[#F8F8F8]">
+          <div className="mb-6">
+            <h1 className="text-2xl font-bold">Settings</h1>
+            <p className="text-sm text-gray-600">Manage your settings here</p>
+          </div>
+
+          {/* <NavigationMenu className="bg-[#FDF9FF] p-2 rounded">
+            <NavigationMenuList className="flex gap-4">
+              <NavigationMenuItem>
+                <NavLink href="#" isActive={activeTab === "account"} onClick={() => setActiveTab("account")}>
+                  Account
+                </NavLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavLink href="#" isActive={activeTab === "notification"} onClick={() => setActiveTab("notification")}>
+                  Notification
+                </NavLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavLink href="#" isActive={activeTab === "security"} onClick={() => setActiveTab("security")}>
+                  Security
+                </NavLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavLink href="#" isActive={activeTab === "appearance"} onClick={() => setActiveTab("appearance")}>
+                  Appearance
+                </NavLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu> */}
+
+
+<NavigationTabs
+            tabs={tabs}
+            defaultActiveTab={activeTab}
+            onTabChange={setActiveTab}
+          />
+          {activeTab === "account" && (
+            <AccountSettings
+              formData={formData}
+              selectedImage={profilePic}
+              handleInputChange={handleInputChange}
+              handleSelectChange={handleSelectChange}
+              handleFileChange={handleFileChange}
+              handleSaveSettings={handleSaveSettings}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Settings;

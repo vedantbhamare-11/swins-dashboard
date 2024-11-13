@@ -6,7 +6,7 @@ import dashboardReducer from "./slices/dashboardSlice";
 import organizationManagementReducer from "./slices/organizationManagementSlice"
 import feedbackManagementReducer from "./slices/feedbackManagementSlice"; 
 import notificationReducer from "./slices/notificationSlice";
-
+import adminDetailsReducer from './slices/adminDetailsSlice'
 
 
 const store = configureStore({
@@ -17,7 +17,7 @@ const store = configureStore({
     organizationManagement: organizationManagementReducer,
     feedbackManagement: feedbackManagementReducer, 
     notifications: notificationReducer,
-
+    adminDetails: adminDetailsReducer,
   },
 });
 
