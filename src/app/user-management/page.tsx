@@ -1,24 +1,19 @@
-// ./src/app/user-management/page.tsx
 "use client";
 
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
-import NavLink from "@/components/NavLink";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Plus, SlidersHorizontal } from "lucide-react"; // Import the filter icon
+import { Input } from "@/components/ui/input";
+import { Plus, SlidersHorizontal } from "lucide-react";
 import AddUserModal from "@/components/AddUserModal";
 import UserTable from "@/components/UserTable";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { addUser } from "@/redux/slices/userManagementSlice";
 import type { User } from "@/redux/slices/userManagementSlice";
+import NavigationTabs from "@/components/NavigationTabs";
 
 const UserManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState("all-members");
@@ -47,7 +42,7 @@ const UserManagement: React.FC = () => {
       id: users.length + 1,
       name: newUser.name,
       email: newUser.email,
-      role: newUser.role as "User" | "Admin", // Type assertion here
+      role: newUser.role as "User" | "Admin",
       reportedTo: newUser.reportedTo || "",
       lastActive: new Date().toLocaleDateString("en-US", {
         month: "short",
@@ -75,6 +70,36 @@ const UserManagement: React.FC = () => {
     return matchesRole && matchesSearch;
   });
 
+  // Tabs configuration
+  const tabs = [
+    { label: "All Members", value: "all-members" },
+    { label: "Employee", value: "employee" },
+    { label: "Admin", value: "admin" },
+  ];
+
+  // Dynamic headings and subheadings
+  const getHeading = () => {
+    switch (activeTab) {
+      case "employee":
+        return {
+          heading: "Employee",
+          subheading: "Manage employee profiles and details",
+        };
+      case "admin":
+        return {
+          heading: "Admin",
+          subheading: "Manage admin profiles and details",
+        };
+      default:
+        return {
+          heading: "All Members",
+          subheading: "Manage user accounts and information",
+        };
+    }
+  };
+
+  const { heading, subheading } = getHeading();
+
   return (
     <div className="flex flex-col flex-1">
       <Header />
@@ -82,7 +107,11 @@ const UserManagement: React.FC = () => {
         <Sidebar />
         <div className="p-4 md:p-6 w-full relative bg-[#F8F8F8] overflow-y-auto">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 space-y-2 md:space-y-0">
-            <h1 className="text-xl md:text-2xl font-bold">User Management</h1>
+            <NavigationTabs
+              tabs={tabs}
+              defaultActiveTab={activeTab}
+              onTabChange={(tabValue) => setActiveTab(tabValue)}
+            />
             <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2 gap-1">
               <Input
                 type="text"
@@ -91,7 +120,10 @@ const UserManagement: React.FC = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="p-2 border rounded-md focus:outline-none focus:ring-2 w-full sm:w-60"
               />
-              <Button variant={"outline"} className="flex w-10 items-center gap-2 p-2 rounded-md">
+              <Button
+                variant={"outline"}
+                className="flex w-10 items-center gap-2 p-2 rounded-md"
+              >
                 <SlidersHorizontal className="w-4 h-4" />
               </Button>
             </div>
@@ -100,31 +132,11 @@ const UserManagement: React.FC = () => {
           <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
             <CardContent>
               <div className="flex justify-between items-center mb-4">
-                <NavigationMenu className="bg-[#FDF9FF] p-2 rounded">
-                  <NavigationMenuList className="flex gap-2 sm:gap-4 flex-wrap">
-                    <NavLink
-                      href="#"
-                      isActive={activeTab === "all-members"}
-                      onClick={() => setActiveTab("all-members")}
-                    >
-                      All Members
-                    </NavLink>
-                    <NavLink
-                      href="#"
-                      isActive={activeTab === "employee"}
-                      onClick={() => setActiveTab("employee")}
-                    >
-                      Employee
-                    </NavLink>
-                    <NavLink
-                      href="#"
-                      isActive={activeTab === "admin"}
-                      onClick={() => setActiveTab("admin")}
-                    >
-                      Admin
-                    </NavLink>
-                  </NavigationMenuList>
-                </NavigationMenu>
+                {/* Active Tab Heading and Subheading */}
+                <div className="mb-4">
+                  <h2 className="text-2xl font-bold">{heading}</h2>
+                  <p className="text-sm text-gray-600">{subheading}</p>
+                </div>
                 <Button
                   onClick={toggleModal}
                   className="flex items-center gap-2 bg-[#1E1E1E] text-white p-2 rounded-md"
