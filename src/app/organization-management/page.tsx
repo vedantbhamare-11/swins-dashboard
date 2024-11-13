@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
-import NavLink from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus, SlidersHorizontal } from "lucide-react";
@@ -11,14 +10,10 @@ import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import OrganizationTable from "@/components/OrganizationTable";
 import AddOrganizationModal from "@/components/AddOrganizationModal";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-} from "@radix-ui/react-navigation-menu";
 import PostPreferenceDialog from "@/components/PostPreferenceDialog";
 import OrganizationDetailsModal from "@/components/OrganizationDetailsModal";
 import { updatePostPreference } from "@/redux/slices/organizationManagementSlice";
+import NavigationTabs from "@/components/NavigationTabs"; 
 
 const OrganizationManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState("all-organizations");
@@ -87,6 +82,13 @@ const OrganizationManagement: React.FC = () => {
     return true;
   });
 
+  // Tabs configuration
+  const tabs = [
+    { label: "All Organizations", value: "all-organizations" },
+    { label: "Post Publicly", value: "post-publicly" },
+    { label: "Admin Approved", value: "admin-approved" },
+  ];
+
   return (
     <div className="flex flex-col flex-1">
       <Header />
@@ -94,40 +96,11 @@ const OrganizationManagement: React.FC = () => {
         <Sidebar />
         <div className="p-4 md:p-6 w-full relative bg-[#F8F8F8] overflow-y-auto">
           <div className="flex items-center justify-between mb-4">
-            <div className="bg-[#FDF9FF] p-2 rounded">
-              <NavigationMenu>
-                <NavigationMenuList className="flex gap-2 sm:gap-4 flex-wrap">
-                  <NavigationMenuItem>
-                    <NavLink
-                      href="#"
-                      isActive={activeTab === "all-organizations"}
-                      onClick={() => setActiveTab("all-organizations")}
-                    >
-                      All Organizations
-                    </NavLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavLink
-                      href="#"
-                      isActive={activeTab === "post-publicly"}
-                      onClick={() => setActiveTab("post-publicly")}
-                    >
-                      Post Publicly
-                    </NavLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavLink
-                      href="#"
-                      isActive={activeTab === "admin-approved"}
-                      onClick={() => setActiveTab("admin-approved")}
-                    >
-                      Admin Approved
-                    </NavLink>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
-            </div>
-
+            <NavigationTabs
+              tabs={tabs}
+              defaultActiveTab={activeTab}
+              onTabChange={(tabValue) => setActiveTab(tabValue)} 
+            />
             <button className="ml-4 p-2 bg-transparent hover:bg-gray-200 rounded-md">
               <SlidersHorizontal className="w-4 h-4 text-gray-600" />
             </button>

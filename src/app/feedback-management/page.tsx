@@ -3,18 +3,17 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import NavLink from "@/components/NavLink";
-import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { SlidersHorizontal } from "lucide-react"; // For the filter icon
+import { SlidersHorizontal } from "lucide-react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import FeedbackTable from "@/components/FeedbackTable"; // Import the new FeedbackTable component
+import FeedbackTable from "@/components/FeedbackTable"; 
+import NavigationTabs from "@/components/NavigationTabs"; 
 
 const FeedbackManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState("accepted"); // Default tab is 'accepted'
-  const [searchQuery, setSearchQuery] = useState(""); // For the search query
+  const [searchQuery, setSearchQuery] = useState("");
   const feedbacks = useSelector((state: RootState) => state.feedbackManagement.feedbacks);
 
   // Function to get the heading text based on active tab
@@ -46,6 +45,13 @@ const FeedbackManagement: React.FC = () => {
     return matchesStatus && matchesSearch;
   });
 
+  // Tabs configuration
+  const tabs = [
+    { label: "Accepted", value: "accepted" },
+    { label: "Flagged", value: "flagged" },
+    { label: "Pending", value: "pending" },
+  ];
+
   return (
     <div className="flex flex-col flex-1">
       <Header />
@@ -53,31 +59,11 @@ const FeedbackManagement: React.FC = () => {
         <Sidebar />
         <div className="p-4 md:p-6 w-full relative bg-[#F8F8F8] overflow-y-auto">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 space-y-2 md:space-y-0">
-            <NavigationMenu className="bg-[#FDF9FF] p-2 rounded">
-              <NavigationMenuList className="flex gap-2 sm:gap-4 flex-wrap">
-                <NavLink
-                  href="#"
-                  isActive={activeTab === "accepted"}
-                  onClick={() => setActiveTab("accepted")}
-                >
-                  Accepted
-                </NavLink>
-                <NavLink
-                  href="#"
-                  isActive={activeTab === "flagged"}
-                  onClick={() => setActiveTab("flagged")}
-                >
-                  Flagged
-                </NavLink>
-                <NavLink
-                  href="#"
-                  isActive={activeTab === "pending"}
-                  onClick={() => setActiveTab("pending")}
-                >
-                  Pending
-                </NavLink>
-              </NavigationMenuList>
-            </NavigationMenu>
+            <NavigationTabs
+              tabs={tabs}
+              defaultActiveTab={activeTab}
+              onTabChange={(tabValue) => setActiveTab(tabValue)}
+            />
             <div className="flex items-center gap-4">
               <input
                 type="text"
@@ -95,11 +81,10 @@ const FeedbackManagement: React.FC = () => {
           <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
             <CardContent>
               <div className="mb-6">
-                <h2 className="text-xl font-bold">{getHeadingText()}</h2>
+                <h2 className="text-2xl font-bold">{getHeadingText()}</h2>
                 <p className="text-sm text-gray-600">Stay updated with the latest employee insights</p>
               </div>
 
-              {/* Feedback Table */}
               <FeedbackTable feedbacks={filteredFeedbacks} searchQuery={searchQuery} />
             </CardContent>
           </Card>

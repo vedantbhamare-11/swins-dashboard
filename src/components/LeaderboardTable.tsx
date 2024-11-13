@@ -37,7 +37,7 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ data }) => {
             <TableCell>{leader.role}</TableCell>
             <TableCell>{leader.points}</TableCell>
             <TableCell>
-              <Button className="text-sm">
+              <Button className="text-sm p-2">
                 View Profile
               </Button>
             </TableCell>
