@@ -75,7 +75,7 @@ const NotificationSettings: React.FC = () => {
         <div className="mt-6 flex justify-center">
           <Button
             onClick={handleSaveSettings}
-            className="p-2 rounded-md"
+            className="p-2 rounded-md w-[30%]"
           >
             Save Notification Settings
           </Button>

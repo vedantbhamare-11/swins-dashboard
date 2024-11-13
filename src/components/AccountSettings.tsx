@@ -162,7 +162,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({
       </CardContent>
       <CardFooter>
         <div className="mt-6 w-full justify-center flex">
-          <Button onClick={handleSave} className="px-6 py-2 rounded-md w-[40%]">
+          <Button onClick={handleSave} className="px-6 py-2 rounded-md w-[30%]">
             Save Account Settings
           </Button>
         </div>

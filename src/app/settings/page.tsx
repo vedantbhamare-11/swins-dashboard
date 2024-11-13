@@ -11,7 +11,7 @@ import AccountSettings from "@/components/AccountSettings";
 import NavigationTabs from "@/components/NavigationTabs"; // Import NavigationTabs
 import NotificationSettings from "@/components/NotificationSettings"; // Import NotificationSettings
 import SecuritySettings from "@/components/SecuritySettings";
-
+import AppearanceSettings from "@/components/AppearanceSettings";
 const Settings: React.FC = () => {
   const [activeTab, setActiveTab] = useState("account");
 
@@ -109,6 +109,7 @@ const Settings: React.FC = () => {
           )}
           {activeTab === "notification" && <NotificationSettings />}
           {activeTab === "security" && <SecuritySettings />}
+          {activeTab === "appearance" && <AppearanceSettings />}
 
         </div>
       </div>

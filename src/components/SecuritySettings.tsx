@@ -148,7 +148,7 @@ const SecuritySettings: React.FC = () => {
       <CardFooter className="flex justify-center">
         <Button
           onClick={handleSaveSettings}
-          className="px-6 py-2 rounded-md w-[20%]"
+          className="px-6 py-2 rounded-md w-[30%]"
         >
           Update Security Settings
         </Button>
