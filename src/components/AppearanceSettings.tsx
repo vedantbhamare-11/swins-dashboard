@@ -7,18 +7,15 @@ import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from "@
 
 const AppearanceSettings: React.FC = () => {
   const [colorTheme, setColorTheme] = useState("light"); 
-  const [dashboardLayout, setDashboardLayout] = useState("default"); 
 
   const handleColorThemeChange = (value: string) => {
     setColorTheme(value); 
   };
 
-  const handleDashboardLayoutChange = (value: string) => {
-    setDashboardLayout(value); 
-  };
+
 
   const handleSaveAppearanceSettings = () => {
-    alert(`Color Theme: ${colorTheme}\nDashboard Layout: ${dashboardLayout}`);
+    console.log("Appearance Settings Saved");
   };
 
   return (
@@ -56,19 +53,6 @@ const AppearanceSettings: React.FC = () => {
           </div>
         </div>
 
-        <div className="mb-6">
-          <p className="font-semibold">Dashboard Layout</p>
-          <Select value={dashboardLayout} onValueChange={handleDashboardLayoutChange}>
-            <SelectTrigger className="mt-2 w-full">
-              <SelectValue placeholder="Select Dashboard Layout" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="default">Default</SelectItem>
-              <SelectItem value="compact">Compact</SelectItem>
-              <SelectItem value="expanded">Expanded</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
         <div className="flex justify-center">
           <Button onClick={handleSaveAppearanceSettings} className="px-6 py-2 rounded-md w-[30%]">
             Save Appearance Settings
