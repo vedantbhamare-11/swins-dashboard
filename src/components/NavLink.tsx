@@ -1,3 +1,4 @@
+// ./src/components/NavLink.tsx
 "use client";
 import React from 'react';
 import Link from 'next/link';
@@ -11,6 +12,7 @@ interface NavLinkProps {
   children: React.ReactNode;
   isActive: boolean; // New prop to determine if the link is active
   onClick: () => void; // Function to call when the link is clicked
+  className?: string; // Optional className for additional custom styling
 }
 
 const NavLink: React.FC<NavLinkProps> = ({ href, children, isActive, onClick }) => {
