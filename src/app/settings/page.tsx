@@ -1,16 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu";
-import NavLink from "@/components/NavLink";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 import { updateAdminDetail, updateProfilePic } from "@/redux/slices/adminDetailsSlice";
 import AccountSettings from "@/components/AccountSettings";
-import NavigationTabs from "@/components/NavigationTabs"; // Import the new NavigationTabs
-
+import NavigationTabs from "@/components/NavigationTabs"; // Import NavigationTabs
+import NotificationSettings from "@/components/NotificationSettings"; // Import NotificationSettings
 
 const Settings: React.FC = () => {
   const [activeTab, setActiveTab] = useState("account");
@@ -73,6 +72,7 @@ const Settings: React.FC = () => {
   const handleSaveSettings = () => {
     console.log("Settings Saved", formData);
   };
+
   const tabs = [
     { label: "Account", value: "account" },
     { label: "Notification", value: "notification" },
@@ -91,33 +91,7 @@ const Settings: React.FC = () => {
             <p className="text-sm text-gray-600">Manage your settings here</p>
           </div>
 
-          {/* <NavigationMenu className="bg-[#FDF9FF] p-2 rounded">
-            <NavigationMenuList className="flex gap-4">
-              <NavigationMenuItem>
-                <NavLink href="#" isActive={activeTab === "account"} onClick={() => setActiveTab("account")}>
-                  Account
-                </NavLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavLink href="#" isActive={activeTab === "notification"} onClick={() => setActiveTab("notification")}>
-                  Notification
-                </NavLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavLink href="#" isActive={activeTab === "security"} onClick={() => setActiveTab("security")}>
-                  Security
-                </NavLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavLink href="#" isActive={activeTab === "appearance"} onClick={() => setActiveTab("appearance")}>
-                  Appearance
-                </NavLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu> */}
-
-
-<NavigationTabs
+          <NavigationTabs
             tabs={tabs}
             defaultActiveTab={activeTab}
             onTabChange={setActiveTab}
@@ -132,6 +106,7 @@ const Settings: React.FC = () => {
               handleSaveSettings={handleSaveSettings}
             />
           )}
+          {activeTab === "notification" && <NotificationSettings />}
         </div>
       </div>
     </div>
