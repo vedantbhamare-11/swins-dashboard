@@ -131,15 +131,15 @@ const UserManagement: React.FC = () => {
 
           <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
             <CardContent>
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex justify-between items-center mb-2">
                 {/* Active Tab Heading and Subheading */}
-                <div className="mb-4">
+                <div>
                   <h2 className="text-2xl font-bold">{heading}</h2>
                   <p className="text-sm text-gray-600">{subheading}</p>
                 </div>
                 <Button
                   onClick={toggleModal}
-                  className="flex items-center gap-2 bg-[#1E1E1E] text-white p-2 rounded-md"
+                  className="flex items-center gap-2 bg-[#1E1E1E] text-white  rounded-md"
                 >
                   <Plus className="w-4 h-4" />
                   Add User

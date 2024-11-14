@@ -8,6 +8,7 @@ import Sidebar from "@/components/Sidebar";
 import { SlidersHorizontal } from "lucide-react";
 import { RootState } from "@/redux/store";
 import NavigationTabs from "@/components/NavigationTabs";
+import { Card, CardContent } from "@/components/ui/card";
 
 const LeaderManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState("weekly");
@@ -62,7 +63,8 @@ const LeaderManagement: React.FC = () => {
             </button>
           </div>
 
-          <div className="bg-white shadow-md rounded-lg p-4 mb-4">
+          <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
+            <CardContent>
             <h1 className="text-xl md:text-2xl font-bold">{getHeadingText()}</h1>
             <p className="text-gray-500 text-sm">
               Recognizing Excellence: Meet this {activeTab}'s top contributors making a difference!
@@ -75,7 +77,8 @@ const LeaderManagement: React.FC = () => {
                 <LeaderboardTable data={leaderboardData} />
               )}
             </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

@@ -107,6 +107,7 @@ const OrganizationManagement: React.FC = () => {
           </div>
 
           <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
+          <CardContent>
             <div className="flex items-center justify-between mb-2">
               <h1 className="text-xl md:text-2xl font-bold">
                 {getHeadingText()}
@@ -122,7 +123,6 @@ const OrganizationManagement: React.FC = () => {
             <p className="text-gray-500 text-sm mb-4">
               Empowering Connections, Building Community
             </p>
-            <CardContent>
               <OrganizationTable
                 organizations={filteredOrganizations} // Pass organizations as a prop
                 onShowDetails={handleShowDetails}
