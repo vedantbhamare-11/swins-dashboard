@@ -65,8 +65,40 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
       setFoundedDate(selectedOrg.foundedDate);
       setSelectedImage(selectedOrg.logo);
       setOrgDescription(selectedOrg.orgDescription);
+      setErrors({});
     }
   }, [selectedOrg]);
+
+  const validateInputs = () => {
+    const newErrors: any = {};
+
+    if (!orgName.trim()) newErrors.orgName = "Organization name is required";
+    if (!orgType.trim()) newErrors.orgType = "Organization type is required";
+    if (!website.trim()) {
+      newErrors.website = "Website URL is required";
+    } else if (!/^https?:\/\/[^\s/$.?#].[^\s]*$/.test(website)) {
+      newErrors.website = "Invalid URL format";
+    }
+    if (!address.trim()) newErrors.address = "Address is required";
+    if (!adminName.trim()) newErrors.adminName = "Admin name is required";
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Invalid email format";
+    }
+    if (!jobTitle.trim()) newErrors.jobTitle = "Job title is required";
+    if (!numEmployees) {
+      newErrors.numEmployees = "Number of employees is required";
+    } else if (isNaN(Number(numEmployees)) || Number(numEmployees) <= 0) {
+      newErrors.numEmployees = "Enter a valid number of employees";
+    }
+    if (!foundedDate) newErrors.foundedDate = "Founded date is required";
+    if (!orgDescription.trim())
+      newErrors.orgDescription = "Organization description is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   // Handle logo file change
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,40 +112,29 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
 
   // Handle save action
   const handleSave = () => {
-    if (numEmployees === "" || foundedDate === undefined) {
-      setErrors({
-        numEmployees: "Number of Employees is required",
-        foundedDate: "Founded Date is required",
-      });
-      return;
+    if (validateInputs()) {
+      // Dispatch the update action with the modified data
+      dispatch(
+        updateOrganization({
+          ...selectedOrg,
+          name: orgName,
+          type: orgType,
+          website,
+          address,
+          adminName,
+          email,
+          jobTitle,
+          numEmployees,
+          foundedDate,
+          logo: selectedImage,
+          orgDescription,
+        })
+      );
+      onClose();
     }
-
-    // Dispatch the update action with the modified data
-    dispatch(
-      updateOrganization({
-        ...selectedOrg,
-        name: orgName,
-        type: orgType,
-        website,
-        address,
-        adminName,
-        email,
-        jobTitle,
-        numEmployees,
-        foundedDate,
-        logo: selectedImage,
-        orgDescription,
-      })
-    );
-
-    onClose();
   };
 
   const handleDiscard = () => {
-    setNumEmployees("");
-    setFoundedDate(undefined);
-    setSelectedImage(null);
-    setOrgDescription("");
     setErrors({});
     onClose();
   };
@@ -121,7 +142,7 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl h-auto">
-        <div className="relative flex gap-8">
+        <div className="relative flex gap-8 h-auto">
           <div className="w-1/2 space-y-4">
             <div>
               <Label htmlFor="orgName">Organisation Name</Label>
@@ -129,7 +150,11 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
                 id="orgName"
                 value={orgName}
                 onChange={(e) => setOrgName(e.target.value)}
+                className={errors.orgName ? "border-red-500" : ""}
               />
+              {errors.orgName && (
+                <p className="text-red-500 text-xs mt-1">{errors.orgName}</p>
+              )}
             </div>
             <div>
               <Label htmlFor="orgType">Organisation Type</Label>
@@ -137,7 +162,11 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
                 id="orgType"
                 value={orgType}
                 onChange={(e) => setOrgType(e.target.value)}
+                className={errors.orgType ? "border-red-500" : ""}
               />
+              {errors.orgType && (
+                <p className="text-red-500 text-xs mt-1">{errors.orgType}</p>
+              )}
             </div>
             <div>
               <Label htmlFor="website">Website URL</Label>
@@ -145,7 +174,11 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
                 id="website"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
+                className={errors.website ? "border-red-500" : ""}
               />
+              {errors.website && (
+                <p className="text-red-500 text-xs mt-1">{errors.website}</p>
+              )}
             </div>
             <div>
               <Label htmlFor="address">Address</Label>
@@ -153,7 +186,11 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
                 id="address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                className={errors.address ? "border-red-500" : ""}
               />
+              {errors.address && (
+                <p className="text-red-500 text-xs mt-1">{errors.address}</p>
+              )}
             </div>
             <div>
               <Label htmlFor="adminName">Admin Name</Label>
@@ -161,7 +198,11 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
                 id="adminName"
                 value={adminName}
                 onChange={(e) => setAdminName(e.target.value)}
+                className={errors.adminName ? "border-red-500" : ""}
               />
+              {errors.adminName && (
+                <p className="text-red-500 text-xs mt-1">{errors.adminName}</p>
+              )}
             </div>
             <div>
               <Label htmlFor="email">Email</Label>
@@ -169,7 +210,11 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className={errors.email ? "border-red-500" : ""}
               />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+              )}
             </div>
             <div>
               <Label htmlFor="jobTitle">Job Title</Label>
@@ -177,7 +222,11 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
                 id="jobTitle"
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
+                className={errors.jobTitle ? "border-red-500" : ""}
               />
+              {errors.jobTitle && (
+                <p className="text-red-500 text-xs mt-1">{errors.jobTitle}</p>
+              )}
             </div>
           </div>
 
@@ -188,7 +237,13 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
                 id="description"
                 value={orgDescription}
                 onChange={(e) => setOrgDescription(e.target.value)}
+                className={errors.orgDescription ? "border-red-500" : ""}
               />
+              {errors.orgDescription && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.orgDescription}
+                </p>
+              )}
             </div>
             <div>
               <Label htmlFor="employees">Number of Employees</Label>
@@ -272,20 +327,17 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
                   onChange={handleFileChange}
                 />
               </label>
-              {errors.selectedImage && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.selectedImage}
-                </p>
-              )}
             </div>
           </div>
         </div>
 
-        <DialogFooter className="mt-[-5%] flex justify-between">
+        <DialogFooter className=" flex justify-between">
           <Button className="w-1/2" variant="outline" onClick={handleDiscard}>
             Discard Changes
           </Button>
-          <Button className="w-1/2" onClick={handleSave}>Save Changes</Button>
+          <Button className="w-1/2" onClick={handleSave}>
+            Save Changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
