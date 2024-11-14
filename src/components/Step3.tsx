@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { ShieldCheck, Earth } from "lucide-react";
 
 interface Step3Props {
@@ -59,11 +58,6 @@ const Step3: React.FC<Step3Props> = ({ handleSubmit }) => {
       {/* Display Error Message if Validation Fails */}
       {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
-      <div className="text-center w-full">
-        <Button onClick={handleAddOrganization} className="w-[60%] max-w-xs mx-auto">
-          Add Organization
-        </Button>
-      </div>
     </div>
   );
 };

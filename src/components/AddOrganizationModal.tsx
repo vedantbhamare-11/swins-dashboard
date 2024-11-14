@@ -9,6 +9,7 @@ import Stepper from "@/components/Stepper";
 import Step1 from "@/components/Step1";
 import Step2 from "@/components/Step2";
 import Step3 from "@/components/Step3";
+import Step4 from "@/components/Step4";
 
 interface AddOrganizationModalProps {
   isOpen: boolean;
@@ -129,28 +130,28 @@ const AddOrganizationModal: React.FC<AddOrganizationModalProps> = ({ isOpen, onC
       if (validateStep2()) {
         setCurrentStep(3);
       }
-    } else {
+    } else if (currentStep === 3) {
       // Dispatch the addOrganization action with all the required fields
       dispatch(
         addOrganization({
           name: orgName,
-          username: adminName, // admin name from step 2
-          email: adminEmail, // admin email from step 2
+          username: adminName, 
+          email: adminEmail, 
           type: orgType,
           website,
-          address, // address from step 1
-          adminName, // admin name from step 2
-          jobTitle, // job title from step 2
-          orgDescription, // organization description from step 2
-          numEmployees, // number of employees from step 2
-          foundedDate, // founded date from step 2
-          logo: selectedImage, // logo from step 1
+          address,
+          adminName,
+          jobTitle, 
+          orgDescription, 
+          numEmployees, 
+          foundedDate, 
+          logo: selectedImage,
           postType,
           adminEmail: ""
         })
       );
-      onClose();
-      resetForm(); 
+
+      setCurrentStep(4);
     }
   };
   
@@ -199,14 +200,16 @@ const AddOrganizationModal: React.FC<AddOrganizationModalProps> = ({ isOpen, onC
             setFoundedDate={setFoundedDate}
             errors={errors}
           />
-        ) : (
+        ) : currentStep === 3 ? (
           <Step3 handleSubmit={handleSubmit} />
+        ) : (
+          <Step4 />
         )}
 
-        {currentStep < 3 && (
+        {currentStep < 4 && (
           <div className="mt-6 text-center">
             <Button onClick={handleSubmit} className="w-[50%]">
-              {currentStep < 2 ? "Continue" : "Add Organization"}
+              {currentStep === 3 ? "Add Organization" : "Continue"}
             </Button>
           </div>
         )}
