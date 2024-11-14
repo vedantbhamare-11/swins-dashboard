@@ -34,12 +34,16 @@ const NotificationSettings: React.FC = () => {
   return (
     <Card className="bg-white shadow-md rounded-lg p-4 my-4">
       <CardContent>
-        <div className="mb-4">
-          <h2 className="text-xl font-bold">Email Notifications</h2>
-          <p className="text-sm text-gray-600">Manage your email notification preferences here</p>
+        <div className="my-4">
+          <h2 className="text-xl font-bold">Notifications</h2>
+          <p className="text-sm text-gray-600">Get alerts for new registrations, feedback submissions, and system updates.</p>
         </div>
 
-        <div className="flex justify-between items-center mb-4">
+        <div>
+        <h2 className="text-lg font-semibold my-6">Email Notifications</h2>
+        </div>
+
+        <div className="flex justify-between items-center my-6">
           <div>
             <p className="font-semibold">New User Registrations</p>
             <p className="text-sm text-gray-600">Receive emails for new user sign-ups</p>
@@ -50,7 +54,7 @@ const NotificationSettings: React.FC = () => {
           />
         </div>
 
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center my-6">
           <div>
             <p className="font-semibold">New Feedback Submissions</p>
             <p className="text-sm text-gray-600">Get notified when new feedback is submitted</p>
@@ -61,7 +65,7 @@ const NotificationSettings: React.FC = () => {
           />
         </div>
 
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center my-6">
           <div>
             <p className="font-semibold">System Updates</p>
             <p className="text-sm text-gray-600">Receive important system update notifications</p>
@@ -72,7 +76,7 @@ const NotificationSettings: React.FC = () => {
           />
         </div>
 
-        <div className="mt-6 flex justify-center">
+        <div className="my-6 flex justify-center">
           <Button
             onClick={handleSaveSettings}
             className="p-2 rounded-md w-[30%]"

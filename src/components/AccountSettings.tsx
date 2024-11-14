@@ -64,9 +64,9 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({
   };
 
   return (
-    <Card className="bg-white shadow-md rounded-lg p-4 mt-4">
+    <Card className="bg-white shadow-md rounded-lg p-4 my-4">
       <CardContent>
-        <div>
+        <div className="my-4">
           <h2 className="text-xl font-bold">Account</h2>
           <p className="text-sm text-gray-600">Customize your profile details</p>
         </div>

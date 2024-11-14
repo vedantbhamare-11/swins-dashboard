@@ -76,11 +76,11 @@ const SecuritySettings: React.FC = () => {
   };
 
   return (
-    <Card className="bg-white shadow-md rounded-lg p-2 my-4">
+    <Card className="bg-white shadow-md rounded-lg p-4 my-4">
       <CardContent>
         <div className="my-4">
           <h2 className="text-xl font-bold">Security</h2>
-          <p className="text-sm text-gray-600">Update your security settings</p>
+          <p className="text-sm text-gray-600">Secure your account with 2FA, login alerts, and trusted device management.</p>
         </div>
 
         <div className="mb-4">
@@ -127,22 +127,19 @@ const SecuritySettings: React.FC = () => {
             name="confirmPassword"
             value={confirmPassword}
             onChange={handlePasswordChange}
-            className="p-2 border rounded-md w-full mt-2"
+            className="p-2 border rounded-md w-full my-2"
           />
           {errors.confirmPassword && (
             <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
           )}
         </div>
 
-        <div className=" justify-between items-center mb-4">
+        <div className=" justify-between items-center mb-4 flex">
           <p className="font-semibold">Two-Factor Authentication</p>
-          <div className="flex items-center gap-2 my-2">
             <Switch
               checked={isTwoFactorEnabled}
               onCheckedChange={handleSwitchChange}
             />
-            <p className="text-sm font-semibold ">Enable 2FA</p>
-          </div>
         </div>
       </CardContent>
       <CardFooter className="flex justify-center">

@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from "@/components/ui/select"; 
 
 const AppearanceSettings: React.FC = () => {
   const [colorTheme, setColorTheme] = useState("light"); 
@@ -22,12 +21,12 @@ const AppearanceSettings: React.FC = () => {
     <Card className="bg-white shadow-md rounded-lg p-4 my-4">
       <CardContent>
         <div className="my-4">
-          <h2 className="text-xl font-bold">Appearance Settings</h2>
-          <p className="text-sm text-gray-600">Customize your dashboard appearance here</p>
+          <h2 className="text-xl font-bold">Appearance</h2>
+          <p className="text-sm text-gray-600">Personalize your app experience by adjusting the look and feel.</p>
         </div>
 
-        <div className="mb-4">
-          <p className="font-semibold mb-2">Color Theme</p>
+        <div className="my-8">
+          <p className="font-semibold my-2">Color Theme</p>
           <div className="flex gap-2">
             <Button
               variant={colorTheme === "light" ? "default" : "outline"}
