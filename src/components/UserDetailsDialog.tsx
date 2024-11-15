@@ -109,17 +109,17 @@ const UserDetailsDialog: React.FC<UserDetailsDialogProps> = ({
               </select>
             </div>
           </div>
-          <div className="w-2/5 flex flex-col justify-center relative">
+          <div className="w-2/5 flex flex-col justify-center">
             <Label className="ml-4 mb-2">Profile Picture</Label>
-            <div className="w-[80%] border rounded-md overflow-hidden ml-4 p-2 relative">
+            <div className="w-[90%] h-[200px] border rounded-md flex items-center justify-center ml-4 p-2 relative">
               <img
                 src={profilePic}
                 alt={user.name}
-                className="w-full h-full object-cover"
+                className="w-full h-[180px] object-cover "
               />
               <label
                 htmlFor="profile-pic-upload"
-                className="absolute bottom-3 right-3 bg-white rounded-full p-1 shadow-md cursor-pointer"
+                className="absolute bottom-3 right-3  bg-white rounded-full p-1 shadow-md cursor-pointer"
               >
                 <SquarePen className="text-gray-500" size={14} />
               </label>

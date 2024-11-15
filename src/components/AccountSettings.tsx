@@ -71,8 +71,8 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({
           <p className="text-sm text-gray-600">Customize your profile details</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-          <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+          <div className="space-y-6 md:col-span-2">
             {/* Full Name Input */}
             <div className="space-y-2">
               <Label htmlFor="full-name">Full Name</Label>
@@ -131,32 +131,33 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({
           </div>
 
           {/* Profile Picture */}
-          <div>
-            <Label htmlFor="profile-pic-upload" className="mb-2 flex justify-center text-gray-700">
+          <div className="flex flex-col items-center">
+            <Label htmlFor="profile-pic-upload" className="mb-2 font-semibold text-gray-700">
               Profile Image
             </Label>
-            <div className="flex flex-col justify-center items-center border border-gray-300 rounded-md h-[350px] w-[300px] mx-auto p-2">
-              <label htmlFor="profile-pic-upload" className="w-full h-full cursor-pointer">
+            <label
+                htmlFor="logo-upload"
+                className="border border-gray-300 rounded-md p-2 flex h-[335px] w-[100%] cursor-pointer"
+              >
                 {selectedImage ? (
                   <img
                     src={selectedImage}
-                    alt="Profile"
-                    className="w-full h-full object-cover rounded-md"
+                    alt="Selected Logo"
+                    className="w-full h-full object-contain"
                   />
                 ) : (
-                  <div className="w-full h-full flex justify-center items-center border-dashed border-gray-500 text-gray-500 rounded-md">
-                    <span>Click to Upload</span>
+                  <div className="border-2 border-dashed border-[#E4E4E7] rounded-md w-full h-full flex items-center justify-center text-gray-500 space-x-2">
+                    <span className="text-xs">Choose your image</span>
                   </div>
                 )}
                 <input
-                  id="profile-pic-upload"
+                  id="logo-upload"
                   type="file"
                   accept="image/*"
                   className="hidden"
                   onChange={handleFileChange}
                 />
               </label>
-            </div>
           </div>
         </div>
       </CardContent>

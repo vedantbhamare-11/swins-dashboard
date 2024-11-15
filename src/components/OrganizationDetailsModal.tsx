@@ -296,16 +296,16 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
               )}
             </div>
 
-            <div className="mt-4 w-full h-1/2">
+            <div className="w-full h-1/2">
               <Label
                 htmlFor="logo-upload"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-700 text-sm mb-1"
               >
                 Logo
               </Label>
               <label
                 htmlFor="logo-upload"
-                className="border border-gray-300 rounded-md p-4 flex h-[90%] items-center justify-center cursor-pointer"
+                className="border border-gray-300 rounded-md p-2 flex h-[280px] w-full items-center justify-center cursor-pointer"
               >
                 {selectedImage ? (
                   <img
@@ -331,7 +331,7 @@ const OrganizationDetailsModal: React.FC<OrganizationDetailsModalProps> = ({
           </div>
         </div>
 
-        <DialogFooter className=" flex justify-between">
+        <DialogFooter className="mt-4 flex justify-between">
           <Button className="w-1/2" variant="outline" onClick={handleDiscard}>
             Discard Changes
           </Button>

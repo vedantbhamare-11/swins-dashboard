@@ -95,10 +95,10 @@ const Step1: React.FC<Step1Props> = ({
       </div>
 
       <div className="w-2/5">
-        <Label htmlFor="logo-upload" className="block text-gray-700 text-sm font-bold mb-2">Logo</Label>
-        <label htmlFor="logo-upload" className="border border-gray-300 rounded-md p-4 flex h-[90%] items-center justify-center cursor-pointer">
+        <Label htmlFor="logo-upload" className="block text-gray-700 text-sm  mb-1">Logo</Label>
+        <label htmlFor="logo-upload" className="border border-gray-300 rounded-md p-2 flex h-[90%] items-center justify-center cursor-pointer">
           {selectedImage ? (
-            <img src={selectedImage} alt="Selected Logo" className="w-full h-full object-contain" />
+            <img src={selectedImage} alt="Selected Logo" className="w-[250px] h-[250px] object-contain" />
           ) : (
             <div className="border-2 border-dashed border-[#E4E4E7] rounded-md w-full h-full flex items-center justify-center text-gray-500 space-x-2">
               <Upload className="w-5 h-5" />
