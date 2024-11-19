@@ -70,7 +70,7 @@ const Step2: React.FC<Step2Props> = ({
         {errors.adminEmail && <p className="text-red-500 text-xs mt-1">{errors.adminEmail}</p>}
       </div>
       <div>
-        <Label htmlFor="jobTitle">Job Title</Label>
+        <Label htmlFor="jobTitle">Admin Role</Label>
         <Input
           id="jobTitle"
           value={jobTitle}
