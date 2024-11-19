@@ -7,9 +7,9 @@ interface Leader {
   department: string;
   role: string;
   points: number;
-  profilePic?: string;
-  email?: string;
-  designation?: string;
+  profilePic: string;
+  email: string;
+  designation: string;
 }
 
 interface LeaderboardState {
@@ -26,10 +26,10 @@ const initialState: LeaderboardState = {
       department: "Engineering",
       role: "Software Engineer",
       points: 250,
-      profilePic: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800", // Random user API for real profile pictures
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
       email: "alice.johnson@example.com",
       designation: "UI Engineer",
-
     },
     {
       rank: 2,
@@ -37,7 +37,10 @@ const initialState: LeaderboardState = {
       department: "Design",
       role: "UI/UX Designer",
       points: 200,
-      profilePic: "https://randomuser.me/api/portraits/men/22.jpg",
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 3,
@@ -45,7 +48,10 @@ const initialState: LeaderboardState = {
       department: "Marketing",
       role: "Marketing Specialist",
       points: 180,
-      profilePic: "https://randomuser.me/api/portraits/women/68.jpg",
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 4,
@@ -53,6 +59,10 @@ const initialState: LeaderboardState = {
       department: "Finance",
       role: "Financial Analyst",
       points: 85,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 5,
@@ -60,41 +70,10 @@ const initialState: LeaderboardState = {
       department: "HR",
       role: "HR Manager",
       points: 83,
-    },
-    {
-      rank: 6,
-      name: "Frank White",
-      department: "Operations",
-      role: "Operations Manager",
-      points: 81,
-    },
-    {
-      rank: 7,
-      name: "Grace Lee",
-      department: "Engineering",
-      role: "Frontend Developer",
-      points: 78,
-    },
-    {
-      rank: 8,
-      name: "Henry Kim",
-      department: "Legal",
-      role: "Legal Advisor",
-      points: 75,
-    },
-    {
-      rank: 9,
-      name: "Ivy Green",
-      department: "Product",
-      role: "Product Manager",
-      points: 72,
-    },
-    {
-      rank: 10,
-      name: "Jack Miller",
-      department: "IT",
-      role: "IT Support",
-      points: 70,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
   ],
   monthly: [
@@ -104,6 +83,10 @@ const initialState: LeaderboardState = {
       department: "Engineering",
       role: "Project Manager",
       points: 200,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 2,
@@ -111,6 +94,10 @@ const initialState: LeaderboardState = {
       department: "Sales",
       role: "Regional Sales Head",
       points: 190,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 3,
@@ -118,6 +105,10 @@ const initialState: LeaderboardState = {
       department: "Finance",
       role: "Senior Analyst",
       points: 177,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 4,
@@ -125,6 +116,10 @@ const initialState: LeaderboardState = {
       department: "Marketing",
       role: "Brand Manager",
       points: 165,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 5,
@@ -132,41 +127,10 @@ const initialState: LeaderboardState = {
       department: "HR",
       role: "Recruiter",
       points: 160,
-    },
-    {
-      rank: 6,
-      name: "Julia King",
-      department: "Operations",
-      role: "Supply Chain Manager",
-      points: 155,
-    },
-    {
-      rank: 7,
-      name: "Kevin Scott",
-      department: "Engineering",
-      role: "Full Stack Developer",
-      points: 150,
-    },
-    {
-      rank: 8,
-      name: "Liam Clark",
-      department: "Legal",
-      role: "Paralegal",
-      points: 145,
-    },
-    {
-      rank: 9,
-      name: "Mia Moore",
-      department: "Product",
-      role: "Product Designer",
-      points: 140,
-    },
-    {
-      rank: 10,
-      name: "Nina Young",
-      department: "IT",
-      role: "Systems Analyst",
-      points: 135,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
   ],
   annually: [
@@ -176,6 +140,10 @@ const initialState: LeaderboardState = {
       department: "Engineering",
       role: "Director of Engineering",
       points: 450,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 2,
@@ -183,6 +151,10 @@ const initialState: LeaderboardState = {
       department: "Marketing",
       role: "Chief Marketing Officer",
       points: 395,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 3,
@@ -190,6 +162,10 @@ const initialState: LeaderboardState = {
       department: "Finance",
       role: "CFO",
       points: 383,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 4,
@@ -197,6 +173,10 @@ const initialState: LeaderboardState = {
       department: "Sales",
       role: "VP of Sales",
       points: 370,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
     {
       rank: 5,
@@ -204,41 +184,10 @@ const initialState: LeaderboardState = {
       department: "Operations",
       role: "COO",
       points: 360,
-    },
-    {
-      rank: 6,
-      name: "Olivia Martinez",
-      department: "HR",
-      role: "Chief HR Officer",
-      points: 355,
-    },
-    {
-      rank: 7,
-      name: "Paul Walker",
-      department: "Legal",
-      role: "General Counsel",
-      points: 348,
-    },
-    {
-      rank: 8,
-      name: "Quinn Rivera",
-      department: "Product",
-      role: "Chief Product Officer",
-      points: 340,
-    },
-    {
-      rank: 9,
-      name: "Riley Anderson",
-      department: "IT",
-      role: "CTO",
-      points: 330,
-    },
-    {
-      rank: 10,
-      name: "Sophia Perez",
-      department: "Engineering",
-      role: "Tech Lead",
-      points: 320,
+      profilePic:
+        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+      email: "alice.johnson@example.com",
+      designation: "UI Engineer",
     },
   ],
 };

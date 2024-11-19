@@ -15,7 +15,11 @@ interface UserProfileModalProps {
   };
 }
 
-const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onClose, user }) => {
+const UserProfileModal: React.FC<UserProfileModalProps> = ({
+  isOpen,
+  onClose,
+  user,
+}) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="w-auto rounded-lg p-0 overflow-hidden">
@@ -36,14 +40,13 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onClose, us
             <button
               onClick={onClose}
               className="absolute top-3 right-3 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg"
-            >
-            </button>
+            ></button>
           </div>
         </DialogHeader>
 
         {/* User Points Section */}
         <div className="my-4 px-4">
-          <h1 className="text-5xl text-center font-bold text-gray-800">{user.points}</h1>
+          <h1 className="text-5xl text-center font-bold">{user.points}</h1>
           <p className="text-lg text-center font-semibold">Points</p>
         </div>
 
