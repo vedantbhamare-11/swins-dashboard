@@ -24,19 +24,16 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="w-auto rounded-lg p-0 overflow-hidden">
         <DialogHeader className="relative">
-          {/* Full-screen image without padding */}
           <div className="relative w-full h-[300px]">
             <img
               src={user.profilePic}
               alt={`${user.name}'s profile`}
               className="w-full h-full object-cover"
             />
-            {/* User name and email on top-left */}
             <div className="absolute top-2 left-2 text-white">
               <div className="text-lg font-semibold">{user.name}</div>
               <div className="text-xs">{user.email}</div>
             </div>
-            {/* Close button on top-right */}
             <button
               onClick={onClose}
               className="absolute top-3 right-3 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg"
@@ -44,14 +41,12 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({
           </div>
         </DialogHeader>
 
-        {/* User Points Section */}
         <div className="my-4 px-4">
           <h1 className="text-5xl text-center font-bold">{user.points}</h1>
           <p className="text-lg text-center font-semibold">Points</p>
         </div>
 
-        {/* Tags Section */}
-        <div className="flex justify-center space-x-4 mb-4 px-4">
+        <div className="flex justify-center space-x-2 mb-4 px-4">
           <span className="bg-[#F0F0F0]  text-xs font-medium px-3 py-1 rounded-sm">
             {user.department}
           </span>
