@@ -11,13 +11,13 @@ interface User {
   id: number;
   name: string;
   email: string;
-  role: "User" | "Admin";
+  role: "User" | "Admin" | "Organization Admin";
 }
 
 interface AddUserModalProps {
   showModal: boolean;
   toggleModal: () => void;
-  newUser: { name: string; email: string; role: string; reportedTo: string };
+  newUser: { name: string; email: string; role: string };
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
@@ -63,7 +63,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center bg-gray-600 bg-opacity-50">
-      <Card className="bg-white rounded-lg w-[350px] max-w-md p-6 relative flex flex-col justify-between">
+      <Card className="bg-white rounded-lg w-[400px] max-w-md p-6 relative flex flex-col justify-between">
         <button onClick={toggleModal} className="absolute top-4 right-4">
           <X className="w-6 h-6 text-gray-600" />
         </button>
@@ -111,25 +111,6 @@ const AddUserModal: React.FC<AddUserModalProps> = ({
             >
               <option value="User">User</option>
               <option value="Admin">Admin</option>
-            </select>
-          </div>
-
-          <div>
-            <Label className="block text-sm font-bold mb-1 ml-1">
-              Reported To
-            </Label>
-            <select
-              name="reportedTo"
-              value={newUser.reportedTo}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded-md"
-            >
-              <option value="">Select a manager</option>
-              {userList.map((user) => (
-                <option key={user.id} value={user.name}>
-                  {user.name}
-                </option>
-              ))}
             </select>
           </div>
         </div>
