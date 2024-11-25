@@ -56,7 +56,7 @@ const Header: React.FC = () => {
               <div className="text-sm font-semibold">TMBC HR Admin</div>
             </button>
           </PopoverTrigger>
-          <PopoverContent className="w-64 p-2 mr-6 shadow-lg bg-white rounded-lg">
+          <PopoverContent align="end" className="w-64 p-2 shadow-lg bg-white rounded-lg">
             {/* Name and Email */}
             <div className="mb-">
               <h1 className="text-lg font-semibold">TMBC HR</h1>

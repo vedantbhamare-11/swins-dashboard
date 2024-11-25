@@ -21,7 +21,7 @@ const UserDetailsDialog: React.FC<UserDetailsDialogProps> = ({
 }) => {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
-  const [role, setRole] = useState<"User" | "Admin">(user.role);
+  const [role, setRole] = useState(user.role); // Accept all roles from User type
   const [profilePic, setProfilePic] = useState(user.profilePic);
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
 
@@ -101,11 +101,12 @@ const UserDetailsDialog: React.FC<UserDetailsDialogProps> = ({
               <select
                 id="role"
                 value={role}
-                onChange={(e) => setRole(e.target.value as "User" | "Admin")}
+                onChange={(e) => setRole(e.target.value as User["role"])}
                 className="w-full p-2 border rounded-md focus:outline-none focus:ring-2"
               >
                 <option value="User">User</option>
                 <option value="Admin">Admin</option>
+                <option value="Organization Admin">Organization Admin</option>
               </select>
             </div>
           </div>
