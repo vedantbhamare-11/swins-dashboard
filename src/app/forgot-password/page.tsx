@@ -5,20 +5,33 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import LogoDark from "@/app/assets/logo_dark_theme.png"; import { Eye, EyeOff } from "lucide-react"; 
+import LogoDark from "@/app/assets/logo_dark_theme.png"; 
 import { useRouter } from 'next/navigation';
 
-const SignIn: React.FC = () => {
+const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); 
-  const router = useRouter(); 
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-  const handleSignIn = () => {
-    // Add your sign-in logic here (e.g., API call for authentication)
-    
-    // On successful authentication, redirect to the dashboard
-    router.push('/dashboard'); // Redirect to the dashboard page
+  const validateEmail = () => {
+    if (!email) {
+      setError("Email is required.");
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return false;
+    }
+    setError("");
+    return true;
+  };
+
+  const handleSubmit = () => {
+    if (validateEmail()) {
+      // Redirect to the reset password page
+      router.push('/reset-password');
+    }
   };
 
   return (
@@ -45,20 +58,16 @@ const SignIn: React.FC = () => {
 
       {/* Right Part: Sign In Form */}
       <div className="md:w-1/2 bg-white flex flex-col justify-center p-8 relative">
-        {/* Sign Up Link in the top-right corner */}
-        <div className="absolute top-4 right-4">
-          <Link href="/signup2" className="hover:underline">
-            Sign Up
-          </Link>
-        </div>
-
         {/* Sign In Form */}
         <div className="w-full md:w-[60%] mx-auto">
           {/* Heading */}
-          <h1 className="text-2xl font-bold mb-2 text-center">Log In</h1>
+          <h1 className="text-2xl font-bold mb-2 text-center">Forgot Password</h1>
           <p className="text-[#71717A] mb-6 text-center">
             Good Morning, Welcome Back!
           </p>
+
+          {/* Validation Error Message */}
+          {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
 
           {/* Input Fields */}
           <div className="mb-4">
@@ -67,35 +76,18 @@ const SignIn: React.FC = () => {
               placeholder="Enter your work email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full placeholder:text-[#C3C3C3]" // Set placeholder color
+              className="w-full placeholder:text-[#C3C3C3]"
             />
-          </div>
-          <div className="mb-4 relative">
-            <Input
-              type={showPassword ? "text" : "password"} // Toggle between text and password type
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full placeholder:text-[#C3C3C3]" // Set placeholder color
-            />
-            {/* Eye Icon for Password Visibility */}
-            <button
-              type="button"
-              className="absolute right-3 top-2.5 text-[#C3C3C3]" // Set icon color
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <EyeOff /> : <Eye />}
-            </button>
           </div>
 
           {/* Sign In Button */}
-          <Button className="w-full mb-6" onClick={handleSignIn}>
-            Sign In
+          <Button className="w-full mb-6" onClick={handleSubmit}>
+            Submit
           </Button>
 
-          {/* Forgot Password Link */}
-          <p className="text-sm text-[#71717A] text-center">
-            <Link href="/forgot-password" className="underline">Forgot Password?</Link>
+          {/* Signup Link */}
+          <p className="text-sm text-[#A8A8A8] text-center">New User?{' '}
+            <Link href="/signup2" className="text-[#000]">Register Here</Link>
           </p>
         </div>
       </div>
@@ -112,4 +104,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default ForgotPassword;
