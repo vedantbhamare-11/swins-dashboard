@@ -5,7 +5,7 @@ export interface User {
   id: number;
   name: string;
   email: string;
-  role: "User" | "Admin";
+  role: "User" | "Admin" | "Organization Admin";
   lastActive: string;
   status: "Active" | "Inactive";
   profilePic: string;
