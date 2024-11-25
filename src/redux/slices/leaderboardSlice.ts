@@ -27,7 +27,7 @@ const initialState: LeaderboardState = {
       role: "Software Engineer",
       points: 250,
       profilePic:
-        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.pexels.com/photos/8993561/pexels-photo-8993561.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=279.825&fit=crop&h=453.05",
       email: "alice.johnson@example.com",
       designation: "UI Engineer",
     },
@@ -38,7 +38,7 @@ const initialState: LeaderboardState = {
       role: "UI/UX Designer",
       points: 200,
       profilePic:
-        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&w=800",
       email: "alice.johnson@example.com",
       designation: "UI Engineer",
     },

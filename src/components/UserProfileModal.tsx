@@ -1,5 +1,5 @@
 import React from "react";
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 interface UserProfileModalProps {
   isOpen: boolean;
@@ -22,40 +22,45 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-auto rounded-lg p-0 overflow-hidden">
-        <DialogHeader className="relative">
-          <div className="relative w-full h-[300px]">
-            <img
-              src={user.profilePic}
-              alt={`${user.name}'s profile`}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-2 left-2 text-white">
-              <div className="text-lg font-semibold">{user.name}</div>
-              <div className="text-xs">{user.email}</div>
-            </div>
-            <button
-              onClick={onClose}
-              className="absolute top-3 right-3 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg"
-            ></button>
-          </div>
-        </DialogHeader>
+      <DialogContent className="w-auto h-[55vh] rounded-lg p-0 overflow-hidden">
+        {/* Profile Picture Section */}
+        <div className="relative w-full h-full">
+          <img
+            src={user.profilePic}
+            alt={`${user.name}'s profile`}
+            className="absolute w-full h-full object-cover"
+          />
 
-        <div className="my-4 px-4">
-          <h1 className="text-5xl text-center font-bold">{user.points}</h1>
-          <p className="text-lg text-center font-semibold">Points</p>
+        {/* Details Card */}
+        <div className="relative bg-white top-[70%] mx-4 rounded-lg p-4">
+          <div className="flex justify-between items-start">
+            {/* Left Side: Name and Email */}
+            <div>
+              <h1 className="text-lg font-bold">{user.name}</h1>
+              <p className="text-sm text-[#929292]">{user.email}</p>
+            </div>
+
+            {/* Right Side: Points */}
+            <div className="text-right">
+              <h1 className="text-3xl font-bold">{user.points}</h1>
+              <p className="text-sm font-medium text-[#929292]">Points</p>
+            </div>
+          </div>
+
+          {/* Tags Section */}
+          <div className="flex justify-start space-x-2 mt-4">
+            <span className="border border-[#929292] text-xs font-medium px-3 py-1 rounded-full">
+              {user.department}
+            </span>
+            <span className="border border-[#929292] text-xs font-medium px-3 py-1 rounded-full">
+              {user.role}
+            </span>
+            <span className="border border-[#929292] text-xs font-medium px-3 py-1 rounded-full">
+              {user.designation}
+            </span>
+          </div>
         </div>
 
-        <div className="flex justify-center space-x-2 mb-4 px-4">
-          <span className="bg-[#F0F0F0]  text-xs font-medium px-3 py-1 rounded-sm">
-            {user.department}
-          </span>
-          <span className="bg-[#F0F0F0] text-xs font-medium px-3 py-1 rounded-sm">
-            {user.role}
-          </span>
-          <span className="bg-[#F0F0F0] text-xs font-medium px-3 py-1 rounded-sm">
-            {user.designation}
-          </span>
         </div>
       </DialogContent>
     </Dialog>
