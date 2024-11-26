@@ -9,7 +9,6 @@ import { Eye, EyeOff } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSearchParams, useRouter } from "next/navigation";
 
-
 const SignUp2: React.FC = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -20,11 +19,20 @@ const SignUp2: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const [errors, setErrors] = useState<{ phoneNumber?: string; password?: string; confirmPassword?: string; isChecked?: string }>({});
-
+  const [errors, setErrors] = useState<{
+    phoneNumber?: string;
+    password?: string;
+    confirmPassword?: string;
+    isChecked?: string;
+  }>({});
 
   const validateInputs = () => {
-    const errors: { phoneNumber?: string; password?: string; confirmPassword?: string; isChecked?: string } = {};
+    const errors: {
+      phoneNumber?: string;
+      password?: string;
+      confirmPassword?: string;
+      isChecked?: string;
+    } = {};
 
     // Phone number validation
     if (!phoneNumber.trim()) {
@@ -52,7 +60,8 @@ const SignUp2: React.FC = () => {
 
     // Checkbox validation
     if (!isChecked) {
-      errors.isChecked = "You must agree to the Terms of Service and Privacy Policy.";
+      errors.isChecked =
+        "You must agree to the Terms of Service and Privacy Policy.";
     }
 
     setErrors(errors);
@@ -164,7 +173,9 @@ const SignUp2: React.FC = () => {
               {showConfirmPassword ? <EyeOff /> : <Eye />}
             </button>
             {errors.confirmPassword && (
-              <p className="text-red-600 text-sm mt-1">{errors.confirmPassword}</p>
+              <p className="text-red-600 text-sm mt-1">
+                {errors.confirmPassword}
+              </p>
             )}
           </div>
 
@@ -193,12 +204,16 @@ const SignUp2: React.FC = () => {
 
           {/* Create Account Button */}
           <Button className="w-full mb-6" onClick={handleSubmit}>
-Submit          </Button>
+            Submit{" "}
+          </Button>
 
           {/* Login Link */}
           <p className="text-sm text-[#71717A] text-center">
             Already Have an Account?{" "}
-            <Link href="/signin" className="underline text-[#000] font-semibold">
+            <Link
+              href="/signin"
+              className="underline text-[#000] font-semibold"
+            >
               Login
             </Link>
           </p>

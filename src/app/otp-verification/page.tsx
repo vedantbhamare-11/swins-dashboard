@@ -37,7 +37,7 @@ const OtpVerification: React.FC = () => {
     }
     setError("");
     // Handle OTP verification logic here
-    router.push("/dashboard"); // Redirect to the Dashboard on success
+    router.push("/complete-verification"); // Redirect to the Dashboard on success
   };
 
   return (
