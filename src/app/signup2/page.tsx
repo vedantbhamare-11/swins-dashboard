@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -9,11 +9,9 @@ import { Eye, EyeOff } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSearchParams, useRouter } from "next/navigation";
 
-
 const SignUp2: React.FC = () => {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const email = searchParams.get("email") || ""; // Retrieve email from query params
+  const [email, setEmail] = useState(""); // Use state to manage the email
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -27,6 +25,11 @@ const SignUp2: React.FC = () => {
     isChecked?: string;
   }>({});
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    setEmail(searchParams.get("email") || ""); // Fetch email on mount
+  }, []);
+
   const validateInputs = () => {
     const errors: {
       phoneNumber?: string;
@@ -35,14 +38,12 @@ const SignUp2: React.FC = () => {
       isChecked?: string;
     } = {};
 
-    // Phone number validation
     if (!phoneNumber.trim()) {
       errors.phoneNumber = "Phone number is required.";
     } else if (!/^\d{10}$/.test(phoneNumber)) {
       errors.phoneNumber = "Phone number must be 10 digits.";
     }
 
-    // Password validation
     const passwordRules =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!password.trim()) {
@@ -52,14 +53,12 @@ const SignUp2: React.FC = () => {
         "Password must be at least 8 characters, include an uppercase letter, a lowercase letter, a digit, and a special character.";
     }
 
-    // Confirm password validation
     if (!confirmPassword.trim()) {
       errors.confirmPassword = "Confirm password is required.";
     } else if (password !== confirmPassword) {
       errors.confirmPassword = "Passwords do not match.";
     }
 
-    // Checkbox validation
     if (!isChecked) {
       errors.isChecked =
         "You must agree to the Terms of Service and Privacy Policy.";
@@ -71,14 +70,11 @@ const SignUp2: React.FC = () => {
 
   const handleSubmit = () => {
     if (validateInputs()) {
-      // Add your account creation logic here (e.g., API call for registration)
-      router.push("/otp-verification"); // Redirect to the Dashboard page
+      router.push("/otp-verification");
     }
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Part: Black Background with Logo */}
       <div className="md:w-1/2 bg-black relative flex flex-col justify-between p-8">
@@ -187,7 +183,7 @@ const SignUp2: React.FC = () => {
             <Checkbox
               id="terms"
               checked={isChecked}
-              onCheckedChange={(checked) => setIsChecked(checked === true)} // Ensure boolean type
+              onCheckedChange={(checked) => setIsChecked(checked === true)}
             />
             <label htmlFor="terms" className="ml-2 text-sm text-[#71717A]">
               By signing up, you agree to our{" "}
@@ -224,7 +220,7 @@ const SignUp2: React.FC = () => {
       </div>
 
       {/* Quote for smaller screens */}
-      <div className="block md:hidden text-white bg-black p-4 text-center">
+      <div className="block md:hidden text-white bg-black p-4 text-center mt-4">
         <p className="italic">
           “This Library has saved me countless hours of work and helped me
           deliver stunning designs to my clients faster than ever before.”
@@ -232,8 +228,6 @@ const SignUp2: React.FC = () => {
         <p className="mt-2">— Sofia Davis</p>
       </div>
     </div>
-    </Suspense>
-
   );
 };
 
