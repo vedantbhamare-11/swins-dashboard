@@ -11,6 +11,41 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
+import NotificationPopover from "./NotificationPopover";
+
+
+const notifications = [
+  {
+    username: "Coding Company",
+    action: "has been added",
+    feedback: "",
+    avatar: "https://i.pravatar.cc/150?img=1",
+  },
+  {
+    username: "Madras Branding Company",
+    action: "has been added",
+    feedback: "",
+    avatar: "https://i.pravatar.cc/150?img=2",
+  },
+  {
+    username: "Anto",
+    action: "reviewed Lokesh’s design",
+    feedback: "Your design Space Harpoon is good.",
+    avatar: "https://i.pravatar.cc/150?img=3",
+  },
+  {
+    username: "Sam",
+    action: "reviewed Rahul’s design",
+    feedback: "Your design looks awesome.",
+    avatar: "https://i.pravatar.cc/150?img=4",
+  },
+  {
+    username: "Rahul",
+    action: "reviewed Adhi’s Video Edit",
+    feedback: "Nice work on the transitions, looks great!",
+    avatar: "https://i.pravatar.cc/150?img=5",
+  },
+];
 
 const Header: React.FC = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -35,9 +70,8 @@ const Header: React.FC = () => {
       {/* Right Side Icons and Admin Info */}
       <div className="flex items-center gap-4 mr-2">
         {/* Notification Bell Icon */}
-        <div className="p-2 border rounded-md hover:bg-gray-100 transition-colors cursor-pointer">
-          <Bell className="text-gray-70 shadow-sm" size={20} />
-        </div>
+        <NotificationPopover notifications={notifications} />
+
 
         {/* Avatar with Admin Info */}
         <Popover open={isPopoverOpen} onOpenChange={setPopoverOpen}>
