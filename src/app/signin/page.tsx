@@ -47,7 +47,7 @@ const SignIn: React.FC = () => {
       <div className="md:w-1/2 bg-white flex flex-col justify-center p-8 relative">
         {/* Sign Up Link in the top-right corner */}
         <div className="absolute top-4 right-4">
-          <Link href="/signup2" className="hover:underline">
+          <Link href="/signup" className="hover:underline">
             Sign Up
           </Link>
         </div>

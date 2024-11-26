@@ -41,7 +41,7 @@ const CompleteVerification: React.FC = () => {
           </h1>
 
           {/* Continue Button */}
-          <Link href="/dashboard">
+          <Link href="/complete-profile">
             <Button className="mt-6 w-full md:w-[60%] mx-auto">
               Continue
             </Button>
