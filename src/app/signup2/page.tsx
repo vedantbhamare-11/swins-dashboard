@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import Logo from "@/app/assets/logo_dark_theme.png";
 import { Eye, EyeOff } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSearchParams, useRouter } from "next/navigation";
+
 
 const SignUp2: React.FC = () => {
   const searchParams = useSearchParams();
@@ -76,6 +77,8 @@ const SignUp2: React.FC = () => {
   };
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
+
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Part: Black Background with Logo */}
       <div className="md:w-1/2 bg-black relative flex flex-col justify-between p-8">
@@ -229,6 +232,8 @@ const SignUp2: React.FC = () => {
         <p className="mt-2">— Sofia Davis</p>
       </div>
     </div>
+    </Suspense>
+
   );
 };
 
