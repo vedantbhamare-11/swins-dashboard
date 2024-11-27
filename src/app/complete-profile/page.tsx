@@ -9,6 +9,8 @@ import Logo from "@/app/assets/logo_light_theme.png";
 import ProfileForm from "@/components/ProfileForm";
 import ProfileImageUpload from "@/components/ProfileImageUpload";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Check } from "lucide-react";
 
 const CompleteProfile: React.FC = () => {
   const [profileImage, setProfileImage] = useState<File | null>(null);
@@ -20,6 +22,7 @@ const CompleteProfile: React.FC = () => {
   const [department, setDepartment] = useState<string | undefined>(undefined);
   const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>(undefined);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const users = useSelector((state: RootState) => state.userManagement.users);
   const leaderboard = useSelector((state: RootState) => state.leaderboard);
@@ -52,9 +55,13 @@ const CompleteProfile: React.FC = () => {
 
   const handleSaveProfile = () => {
     if (validateInputs()) {
-      console.log("Profile saved successfully!");
-      router.push("/dashboard");
+      setIsModalOpen(true); // Open success modal
     }
+  };
+
+  const handleContinue = () => {
+    setIsModalOpen(false);
+    router.push("/dashboard");
   };
 
   return (
@@ -107,6 +114,21 @@ const CompleteProfile: React.FC = () => {
       <Button className="mt-8 w-[30%] h-12" onClick={handleSaveProfile}>
         Save Profile
       </Button>
+
+      {/* Success Modal */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="flex flex-col items-center justify-center p-8 space-y-6">
+          <div className="w-15 h-15 p-2 rounded-full bg-black flex items-center justify-center">
+            <Check size={40} color="white" />
+          </div>
+          <h2 className="text-2xl font-semibold text-center">
+            Your Profile Has <br /> Been Set Up
+          </h2>
+          <Button className="w-full" onClick={handleContinue}>
+            Continue
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
