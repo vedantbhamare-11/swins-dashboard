@@ -187,11 +187,11 @@ const SignUp2: React.FC = () => {
             />
             <label htmlFor="terms" className="ml-2 text-sm text-[#71717A]">
               By signing up, you agree to our{" "}
-              <Link href="#" className="underline text-[#000]">
+              <Link href="#" className=" text-[#000]">
                 Terms of Service
               </Link>{" "}
               and{" "}
-              <Link href="#" className="underline text-[#000]">
+              <Link href="#" className=" text-[#000]">
                 Privacy Policy
               </Link>
               .
@@ -209,10 +209,7 @@ const SignUp2: React.FC = () => {
           {/* Login Link */}
           <p className="text-sm text-[#71717A] text-center">
             Already Have an Account?{" "}
-            <Link
-              href="/signin"
-              className="underline text-[#000] font-semibold"
-            >
+            <Link href="/signin" className=" text-[#000] font-semibold">
               Login
             </Link>
           </p>

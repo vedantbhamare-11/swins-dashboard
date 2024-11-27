@@ -56,7 +56,7 @@ const ResetPassword: React.FC = () => {
       // Add your password reset logic here (e.g., API call)
       
       // On success, redirect to the dashboard
-      router.push('/dashboard');
+      router.push('/signin');
     }
   };
 
@@ -135,7 +135,7 @@ const ResetPassword: React.FC = () => {
 
           {/* Signup Link */}
           <p className="text-sm text-[#A8A8A8] text-center">New User?{' '}
-            <Link href="/signup2" className="text-[#000]">Register Here</Link>
+            <Link href="/signup2" className="hover:underline font-semibold text-[#000]">Register Here</Link>
           </p>
         </div>
       </div>
