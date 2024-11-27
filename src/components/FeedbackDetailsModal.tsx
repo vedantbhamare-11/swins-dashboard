@@ -155,7 +155,7 @@ const FeedbackDetailsModal: React.FC<FeedbackDetailsModalProps> = ({ isOpen, onC
         setActionDetails={setActionDetails}
         onConfirm={handleFlag}
         confirmLabel="Flag"
-        confirmClassName="bg-[#C5ECFF] text-[#006A9F] hover:bg-[#A3D6E9]"
+        confirmClassName="bg-[#C5ECFF] w-full text-[#006A9F] hover:bg-[#A3D6E9]"
       />
 
       <ActionModal
@@ -167,7 +167,7 @@ const FeedbackDetailsModal: React.FC<FeedbackDetailsModalProps> = ({ isOpen, onC
         setActionDetails={setActionDetails}
         onConfirm={handleReject}
         confirmLabel="Reject"
-        confirmClassName="bg-[#FFD8D8] text-[#EF5050] hover:bg-[#F7B5B5]"
+        confirmClassName="bg-[#FFD8D8] w-full text-[#EF5050] hover:bg-[#F7B5B5]"
       />
     </>
   );

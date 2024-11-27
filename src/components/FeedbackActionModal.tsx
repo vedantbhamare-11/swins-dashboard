@@ -27,27 +27,32 @@ const FeedbackActionModal: React.FC<FeedbackActionModalProps> = ({
   confirmLabel,
   confirmClassName,
 }) => {
+  const charLimit = 100;
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md p-4">
         <DialogHeader>
           <h2 className="text-lg font-bold">{title}</h2>
         </DialogHeader>
-        <div className="mt-8">
+        <div className="relative">
           <textarea
             placeholder={placeholder}
             value={actionDetails}
-            onChange={(e) => setActionDetails(e.target.value)}
-            className="w-full p-2 border rounded-md resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-gray-300"
-            rows={Math.min(5, Math.max(1, Math.ceil(actionDetails.length / 50)))} // Adjust rows dynamically
+            onChange={(e) =>
+              e.target.value.length <= charLimit && setActionDetails(e.target.value)
+            }
+            className="w-full p-2 border rounded-md resize-none focus:outline-none focus:ring-1 focus:ring-gray-300"
+            rows={4}
+            maxLength={charLimit} // Limit character count
           />
+          {/* Character count display */}
+          <span className="absolute bottom-2 right-2 text-sm text-gray-500">
+            {actionDetails.length}/{charLimit}
+          </span>
         </div>
-        <DialogFooter className="mt-6">
-          <Button
-            variant="outline"
-            className="mr-2"
-            onClick={onClose}
-          >
+        <DialogFooter>
+          <Button variant="outline" className="w-full" onClick={onClose}>
             Discard
           </Button>
           <Button onClick={onConfirm} className={confirmClassName}>
