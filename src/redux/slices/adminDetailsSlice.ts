@@ -7,16 +7,20 @@ interface AdminDetailsState {
   email: string;
   role: string;
   timeZone: string;
-  profilePic: string | null; // profilePic can be a URL or null if not set
+  profilePic: string | null; 
+  department: string; 
+  designation: string; 
 }
 
-// Initial state for admin details
+// Initial state for admin details, with the new fields
 const initialState: AdminDetailsState = {
   fullName: "John Doe",
   email: "johndoe@example.com",
   role: "Admin",
   timeZone: "GMT",
   profilePic: "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=800", // initially, the profile picture is not set
+  department: "Marketing", 
+  designation: "Manager",
 };
 
 const adminDetailsSlice = createSlice({
@@ -30,6 +34,8 @@ const adminDetailsSlice = createSlice({
       state.role = action.payload.role;
       state.timeZone = action.payload.timeZone;
       state.profilePic = action.payload.profilePic;
+      state.department = action.payload.department;
+      state.designation = action.payload.designation;
     },
     updateProfilePic: (state, action: PayloadAction<string | null>) => {
       // Updates only the profile picture
@@ -39,7 +45,7 @@ const adminDetailsSlice = createSlice({
       state,
       action: PayloadAction<{ key: keyof AdminDetailsState; value: string }>
     ) => {
-      // Updates a specific detail, e.g., fullName, email, etc.
+      // Updates a specific detail, e.g., fullName, email, department, etc.
       const { key, value } = action.payload;
       state[key] = value;
     },

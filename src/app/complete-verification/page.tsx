@@ -37,7 +37,7 @@ const CompleteVerification: React.FC = () => {
 
           {/* Success Message */}
           <h1 className="text-3xl    mb-2">
-            Your Email Has Been <br /> Successfully Verified
+            Your Have Been <br /> Successfully Registered
           </h1>
 
           {/* Continue Button */}

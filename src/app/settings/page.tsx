@@ -12,10 +12,13 @@ import NavigationTabs from "@/components/NavigationTabs"; // Import NavigationTa
 import NotificationSettings from "@/components/NotificationSettings"; // Import NotificationSettings
 import SecuritySettings from "@/components/SecuritySettings";
 import AppearanceSettings from "@/components/AppearanceSettings";
+import AdminAccountSettings from "@/components/AdminAccountSettings"; // Import the new component
+
 const Settings: React.FC = () => {
   const [activeTab, setActiveTab] = useState("account");
 
-  const { fullName, email, role, timeZone, profilePic } = useSelector(
+  // Get the admin details from the Redux store
+  const { fullName, email, role, timeZone, profilePic, department, designation } = useSelector(
     (state: RootState) => state.adminDetails
   );
   const dispatch = useDispatch();
@@ -25,7 +28,9 @@ const Settings: React.FC = () => {
     fullName,
     email,
     role,
-    timeZone, // Ensure timeZone is included here
+    timeZone,
+    department, // Include department
+    designation, // Include designation
   });
 
   // Auto-fill form data on component mount
@@ -34,9 +39,11 @@ const Settings: React.FC = () => {
       fullName,
       email,
       role,
-      timeZone, // Update formData with the current timeZone from Redux
+      timeZone,
+      department, // Include department
+      designation, // Include designation
     });
-  }, [fullName, email, role, timeZone]);
+  }, [fullName, email, role, timeZone, department, designation]);
 
   // Handle input change for text fields
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,19 +105,29 @@ const Settings: React.FC = () => {
             onTabChange={setActiveTab}
           />
           {activeTab === "account" && (
-            <AccountSettings
-              formData={formData}
-              selectedImage={profilePic}
-              handleInputChange={handleInputChange}
-              handleSelectChange={handleSelectChange}
-              handleFileChange={handleFileChange}
-              handleSaveSettings={handleSaveSettings}
-            />
+            <>
+              <AccountSettings
+                formData={formData}
+                selectedImage={profilePic}
+                handleInputChange={handleInputChange}
+                handleSelectChange={handleSelectChange}
+                handleFileChange={handleFileChange}
+                handleSaveSettings={handleSaveSettings}
+              />
+              {/* New Component added below */}
+              {/* Hidden by default */}
+              {/* <AdminAccountSettings
+                formData={formData}
+                selectedImage={profilePic}
+                handleInputChange={handleInputChange}
+                handleFileChange={handleFileChange}
+                handleSaveSettings={handleSaveSettings}
+              /> */}
+            </>
           )}
           {activeTab === "notification" && <NotificationSettings />}
           {activeTab === "security" && <SecuritySettings />}
           {activeTab === "appearance" && <AppearanceSettings />}
-
         </div>
       </div>
     </div>
