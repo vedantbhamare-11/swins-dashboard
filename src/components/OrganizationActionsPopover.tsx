@@ -9,15 +9,13 @@ import { ListCollapse, Eye, Pause, Trash2, MoreVertical } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 interface OrganizationActionsPopoverProps {
-  onShowDetails: () => void;
-  onPostPreference: () => void;
-  onSuspend: () => void;
+  onShowDetails?: () => void;
+  onPostPreference?: () => void;
 }
 
 const OrganizationActionsPopover: React.FC<OrganizationActionsPopoverProps> = ({
   onShowDetails,
   onPostPreference,
-  onSuspend,
 }) => {
   return (
     <Popover>
@@ -44,7 +42,6 @@ const OrganizationActionsPopover: React.FC<OrganizationActionsPopoverProps> = ({
         </button>
         <Separator className="my-2" />
         <button
-          onClick={onSuspend}
           className="flex items-center gap-2 w-full p-2 hover:bg-gray-100 rounded-md text-sm"
         >
           <Pause size={16} />

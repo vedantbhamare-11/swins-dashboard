@@ -83,7 +83,6 @@ const OrganizationTable: React.FC<OrganizationTableProps> = ({
               <OrganizationActionsPopover
                 onShowDetails={() => onShowDetails(org)} // Passing full organization details
                 onPostPreference={() => handlePostPreference(org)} // Passing post preference handler
-                onSuspend={() => onSuspend(org)} // Passing suspend handler
               />
             </TableCell>
           </TableRow>

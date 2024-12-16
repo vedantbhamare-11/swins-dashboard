@@ -1,5 +1,5 @@
+// ./src/app/organization-management/page.tsx
 "use client";
-
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -8,12 +8,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Plus, SlidersHorizontal } from "lucide-react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import OrganizationTable from "@/components/OrganizationTable";
+import OrganizationCard from "@/components/OrganizationCard";
 import AddOrganizationModal from "@/components/AddOrganizationModal";
 import PostPreferenceDialog from "@/components/PostPreferenceDialog";
 import OrganizationDetailsModal from "@/components/OrganizationDetailsModal";
 import { updatePostPreference } from "@/redux/slices/organizationManagementSlice";
-import NavigationTabs from "@/components/NavigationTabs"; 
+import NavigationTabs from "@/components/NavigationTabs";
 
 const OrganizationManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState("all-organizations");
@@ -99,7 +99,7 @@ const OrganizationManagement: React.FC = () => {
             <NavigationTabs
               tabs={tabs}
               defaultActiveTab={activeTab}
-              onTabChange={(tabValue) => setActiveTab(tabValue)} 
+              onTabChange={(tabValue) => setActiveTab(tabValue)}
             />
             <button className="ml-4 p-2 bg-transparent hover:bg-gray-200 rounded-md">
               <SlidersHorizontal className="w-4 h-4 text-gray-600" />
@@ -107,28 +107,32 @@ const OrganizationManagement: React.FC = () => {
           </div>
 
           <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
-          <CardContent>
-            <div className="flex items-center justify-between mb-2">
-              <h1 className="text-xl md:text-2xl font-bold">
-                {getHeadingText()}
-              </h1>
-              <Button
-                onClick={handleModalOpen}
-                className="flex items-center gap-2 bg-[#1E1E1E] text-white p-2 rounded-md"
-              >
-                <Plus className="w-4 h-4" />
-                Add Organization
-              </Button>
-            </div>
-            <p className="text-gray-500 text-sm mb-4">
-              Empowering Connections, Building Community
-            </p>
-              <OrganizationTable
-                organizations={filteredOrganizations} // Pass organizations as a prop
-                onShowDetails={handleShowDetails}
-                onSuspend={() => {}}
-                onPostPreference={handlePostPreferenceOpen}
-              />
+            <CardContent>
+              <div className="flex items-center justify-between mb-2">
+                <h1 className="text-xl md:text-2xl font-bold">
+                  {getHeadingText()}
+                </h1>
+                <Button
+                  onClick={handleModalOpen}
+                  className="flex items-center gap-2 bg-[#1E1E1E] text-white p-2 rounded-md"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Organization
+                </Button>
+              </div>
+              <p className="text-gray-500 text-sm mb-4">
+              List of Organizations to feedbacks
+              </p>
+              <div className="flex gap-4 grid grid-cols-4">
+                {filteredOrganizations.map((org) => (
+                  <OrganizationCard
+                    key={org.name}
+                    organization={org}
+                    onShowDetails={() => handleShowDetails(org)}
+                    onPostPreference={() => handlePostPreferenceOpen(org)}
+                  />
+                ))}
+              </div>
             </CardContent>
           </Card>
 
