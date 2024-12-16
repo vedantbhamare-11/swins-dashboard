@@ -147,7 +147,11 @@ const AddOrganizationModal: React.FC<AddOrganizationModalProps> = ({ isOpen, onC
           foundedDate, 
           logo: selectedImage,
           postType,
-          adminEmail: ""
+          adminEmail: "",
+          users: [], // Empty array for now
+    feedbacks: [], // Empty array for now
+    leaderboard: [], // Empty array for now
+
         })
       );
 

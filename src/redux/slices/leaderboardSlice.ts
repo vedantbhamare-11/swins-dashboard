@@ -1,7 +1,7 @@
 // ./redux/slices/leaderboardSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Leader {
+export interface Leader {
   rank: number;
   name: string;
   department: string;

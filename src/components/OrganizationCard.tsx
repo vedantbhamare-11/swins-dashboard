@@ -2,6 +2,7 @@ import React from "react";
 import { Globe, MailIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import OrganizationActionsPopover from "./OrganizationActionsPopover";
+import { useRouter } from "next/navigation";
 
 interface OrganizationCardProps {
   organization: {
@@ -21,8 +22,15 @@ const OrganizationCard: React.FC<OrganizationCardProps> = ({
   onShowDetails,
   onPostPreference,
 }) => {
+  // Move useRouter inside the component
+  const router = useRouter();
+
+  const handleOrganizationClick = () => {
+    router.push(`/organization-management/${organization.name}`);
+  };
+
   return (
-    <div className="bg-whit  shadow-md rounded-lg p-4 mb-4 h-auto w-full">
+    <div className="bg-white shadow-md rounded-lg p-4 mb-4 h-auto w-full">
       <div className="flex justify-between items-start">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <img
@@ -63,7 +71,7 @@ const OrganizationCard: React.FC<OrganizationCardProps> = ({
 
       <div className="mt-4">
         <Button
-          onClick={onShowDetails}
+          onClick={handleOrganizationClick}
           className="w-full bg-[#1E1E1E] text-white"
         >
           View Organization
