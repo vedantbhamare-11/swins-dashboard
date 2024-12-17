@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { useParams } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -11,6 +12,7 @@ import Header from "@/components/Header"; // Import Header component
 import Sidebar from "@/components/Sidebar"; // Import Sidebar component
 import AddUserModal from "@/components/AddUserModal"; // Import AddUserModal
 import { Button } from "@/components/ui/button";
+import FilterPopover from "@/components/FilterPopover"; // Import FilterPopover
 
 const OrganizationDetailPage: React.FC = () => {
   const { orgName } = useParams(); // Capture the org name from the URL
@@ -21,6 +23,17 @@ const OrganizationDetailPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("user");
   const [showModal, setShowModal] = useState(false);
   const [newUser, setNewUser] = useState({ name: "", email: "", role: "User" });
+
+  const [filters, setFilters] = useState<Record<string, boolean>>({
+    active: true,
+    inactive: true,
+  });
+
+  // Dummy labels for the filter popover
+  const labels = [
+    { label: "Active", name: "active" },
+    { label: "Inactive", name: "inactive" },
+  ];
 
   // Ensure orgName is a string (in case it's an array)
   const decodedOrgName = decodeURIComponent(
@@ -48,6 +61,14 @@ const OrganizationDetailPage: React.FC = () => {
     // Reset form and close the modal
     setNewUser({ name: "", email: "", role: "User" });
     setShowModal(false);
+  };
+
+  // Handle filter change in the popover
+  const handleFilterChange = (name: string) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: !prevFilters[name],
+    }));
   };
 
   const tabs = [
@@ -79,11 +100,11 @@ const OrganizationDetailPage: React.FC = () => {
         <Sidebar /> {/* Include the Sidebar */}
         <div className="p-4 md:p-6 w-full relative bg-[#F8F8F8] overflow-y-auto">
           <div className="flex flex-row justify-between">
-            <div className="flex flex-col  mb-4 space-y-2 md:space-y-0">
+            <div className="flex flex-col mb-4 space-y-2 md:space-y-0">
               <h2 className="text-2xl font-bold">{selectedOrg.name}</h2>
               <p className="text-sm text-gray-600">{selectedOrg.type}</p>
             </div>
-            <div>
+            <div className="flex items-center gap-2">
               {/* Add User Button (Only in the User Tab) */}
               {activeTab === "user" && (
                 <Button
@@ -92,6 +113,14 @@ const OrganizationDetailPage: React.FC = () => {
                 >
                   Add User
                 </Button>
+              )}
+              {/* Filter Popover (For all tabs: User, Feedback, and Leaderboard) */}
+              {(activeTab === "user" || activeTab === "feedback" || activeTab === "leaderboard") && (
+                <FilterPopover
+                  labels={labels}
+                  filters={filters}
+                  onFilterChange={handleFilterChange}
+                />
               )}
             </div>
           </div>
