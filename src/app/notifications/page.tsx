@@ -28,7 +28,7 @@ const Notifications: React.FC = () => {
       <Header />
       <div className="flex h-screen">
         <Sidebar />
-        <div className="w-full p-4 md:p-6 bg-[#F8F8F8]">
+        <div className="p-4 ml-72 mt-24 w-full relative  overflow-y-auto">
           {/* Single Card container for Notifications */}
           <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
             <CardContent>

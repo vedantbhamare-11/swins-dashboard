@@ -146,7 +146,7 @@ const UserManagement: React.FC = () => {
       <Header />
       <div className="flex h-screen">
         <Sidebar />
-        <div className="p-4 md:p-6 w-full relative bg-[#F8F8F8] overflow-y-auto">
+        <div className="p-4 ml-72 mt-24 w-full relative  overflow-y-auto">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 space-y-2 md:space-y-0">
             <NavigationTabs
               tabs={tabs}

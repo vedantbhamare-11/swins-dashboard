@@ -98,7 +98,7 @@ const OrganizationDetailPage: React.FC = () => {
       <Header /> {/* Include the Header */}
       <div className="flex h-screen">
         <Sidebar /> {/* Include the Sidebar */}
-        <div className="p-4 md:p-6 w-full relative bg-[#F8F8F8] overflow-y-auto">
+        <div className="p-4 ml-72 mt-24 w-full relative  overflow-y-auto">
           <div className="flex flex-row justify-between">
             <div className="flex flex-col mb-4 space-y-2 md:space-y-0">
               <h2 className="text-2xl font-bold">{selectedOrg.name}</h2>

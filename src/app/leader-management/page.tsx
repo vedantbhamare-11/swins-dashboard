@@ -75,7 +75,7 @@ const LeaderManagement: React.FC = () => {
       <Header />
       <div className="flex h-screen">
         <Sidebar />
-        <div className="p-4 md:p-6 w-full relative bg-[#F8F8F8] overflow-y-auto">
+        <div className="p-4 ml-72 mt-24 w-full relative  overflow-y-auto">
           <div className="flex items-center justify-between mb-4">
             <NavigationTabs
               tabs={tabs}

@@ -93,7 +93,7 @@ const Settings: React.FC = () => {
       <Header />
       <div className="flex h-screen">
         <Sidebar />
-        <div className="w-full p-4 md:p-6 bg-[#F8F8F8]">
+        <div className="p-4 ml-72 mt-24 w-full relative  overflow-y-auto">
           <div className="mb-6">
             <h1 className="text-2xl font-bold">Settings</h1>
             <p className="text-sm text-gray-600">Manage your settings here</p>
