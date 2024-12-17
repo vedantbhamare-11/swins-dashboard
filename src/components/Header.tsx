@@ -53,18 +53,18 @@ const Header: React.FC = () => {
   const togglePopover = () => setPopoverOpen((prev) => !prev);
 
   return (
-    <header className="flex items-end justify-between p-4 bg-white border-b">
+    <header className="fixed top-0 left-0 right-0 flex items-end justify-between p-4 bg-white border-b">
       {/* Logo and Search Bar */}
       <div className="flex items-center gap-4">
         {/* Logo */}
-        <Image src={Logo} alt="Company Logo" width={150} height={50} />
+        {/* <Image src={Logo} alt="Company Logo" width={150} height={50} /> */}
 
         {/* Search Bar */}
-        <Input
+        {/* <Input
           type="text"
           placeholder="Search..."
           className="w-60 p-2 border ml-10 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-        />
+        /> */}
       </div>
 
       {/* Right Side Icons and Admin Info */}

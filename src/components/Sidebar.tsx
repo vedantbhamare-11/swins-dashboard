@@ -1,6 +1,7 @@
 // ./src/components/Sidebar.tsx
 "use client";
-
+import Image from "next/image";
+import Logo from "@/app/assets/logo_light_theme.png";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -42,7 +43,18 @@ const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="bg-white text-gray-700 h-full w-[400px] p-5 flex flex-col border-r">
+    <aside className="fixed left-0 top-0 z-50  h-full border-r border-gray-200 p-4 flex flex-col border-r">
+      <div className="flex ml-2 items-center mt-2 mb-12 gap-4">
+        {/* Logo */}
+        <Image src={Logo} alt="Company Logo" width={150} height={50} />
+
+        {/* Search Bar */}
+        {/* <Input
+          type="text"
+          placeholder="Search..."
+          className="w-60 p-2 border ml-10 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+        /> */}
+      </div>
       <nav className="flex flex-col gap-4">
         {navLinks.map((link, index) => (
           <Link key={index} href={link.path} legacyBehavior>

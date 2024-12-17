@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
       <Header />
       <div className="flex h-screen">
         <Sidebar />
-        <div className="w-full">
+        <div className="w-full ml-64 mt-20">
           <div className="flex gap-4 mt-4 mx-4 md:mx-10">
             {/* Updated Dashboard Cards */}
             <DashboardCard title="Total Organizations" description={22} />

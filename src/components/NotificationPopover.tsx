@@ -31,10 +31,10 @@ const NotificationPopover: React.FC<NotificationPopoverProps> = ({ notifications
       {/* Popover Trigger */}
       <PopoverTrigger asChild>
         <button
-          className="p-2 border rounded-md hover:bg-gray-100 transition-colors cursor-pointer"
+          className="p-3 border rounded-md hover:bg-gray-100 transition-colors cursor-pointer"
           onClick={togglePopover}
         >
-          <Bell className="text-gray-700" size={20} />
+          <Bell className="text-gray-700" size={23} />
         </button>
       </PopoverTrigger>
 
