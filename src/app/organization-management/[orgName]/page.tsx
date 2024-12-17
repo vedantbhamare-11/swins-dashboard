@@ -13,6 +13,8 @@ import Sidebar from "@/components/Sidebar"; // Import Sidebar component
 import AddUserModal from "@/components/AddUserModal"; // Import AddUserModal
 import { Button } from "@/components/ui/button";
 import FilterPopover from "@/components/FilterPopover"; // Import FilterPopover
+import { ArrowLeft } from "lucide-react"; // Import ArrowLeft icon from lucide-react
+import { useRouter } from "next/navigation"; // Import useRouter hook from next/navigation
 
 const OrganizationDetailPage: React.FC = () => {
   const { orgName } = useParams(); // Capture the org name from the URL
@@ -20,6 +22,7 @@ const OrganizationDetailPage: React.FC = () => {
     (state: RootState) => state.organizationManagement.organizations
   );
 
+  const router = useRouter(); // Initialize useRouter hook for navigation
   const [activeTab, setActiveTab] = useState("user");
   const [showModal, setShowModal] = useState(false);
   const [newUser, setNewUser] = useState({ name: "", email: "", role: "User" });
@@ -99,10 +102,21 @@ const OrganizationDetailPage: React.FC = () => {
       <div className="flex h-screen">
         <Sidebar /> {/* Include the Sidebar */}
         <div className="p-4 ml-72 mt-24 w-full relative  overflow-y-auto">
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-row justify-between items-center mb-4">
+            {/* Back Button */}
+            <div className="flex">
+            <Button
+              variant="link"
+              onClick={() => router.push("/organization-management")}
+              className="text-gray-600"
+            >
+              <ArrowLeft size={28} />
+            </Button>
+
             <div className="flex flex-col mb-4 space-y-2 md:space-y-0">
               <h2 className="text-2xl font-bold">{selectedOrg.name}</h2>
               <p className="text-sm text-gray-600">{selectedOrg.type}</p>
+            </div>
             </div>
             <div className="flex items-center gap-2">
               {/* Add User Button (Only in the User Tab) */}

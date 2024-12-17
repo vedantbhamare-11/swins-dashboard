@@ -30,7 +30,7 @@ const OrganizationCard: React.FC<OrganizationCardProps> = ({
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 mb-4 h-auto w-full">
+    <div className="bg-white border border-gray-300 rounded-lg p-4 mb-4 h-auto w-full">
       <div className="flex justify-between items-start">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <img
@@ -50,13 +50,13 @@ const OrganizationCard: React.FC<OrganizationCardProps> = ({
         <h3 className="text-xl font-normal">{organization.name}</h3>
 
         <div className="flex mt-2">
-          <MailIcon className="w-4 h-4 text-gray-500 mr-2 absolute" />
-          <p className="ml-6 relative w-full pr-2 text-sm text-gray-500 break-words">{organization.email}</p>
+          <MailIcon className="w-4 h-4 text-gray-500 mr-2" />
+          <p className=" relative w-full pr-2 text-sm text-gray-500 break-words">{organization.email}</p>
         </div>
 
         <div className="flex">
-          <Globe className="w-4 h-4 text-gray-500 mr-2 absolute" />
-          <p className="ml-6 relative w-full pr-2 text-sm text-gray-500 break-words">{organization.website}</p>
+          <Globe className="w-4 h-4 text-gray-500 mr-2" />
+          <p className=" relative w-full pr-2 text-sm text-gray-500 break-words">{organization.website}</p>
         </div>
       </div>
 

@@ -1,4 +1,3 @@
-// ./src/app/organization-management/page.tsx
 "use client";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -94,7 +93,7 @@ const OrganizationManagement: React.FC = () => {
       <Header />
       <div className="flex h-screen">
         <Sidebar />
-        <div className="p-4 ml-72 mt-24 w-full relative  overflow-y-auto">
+        <div className="p-4 ml-72 mt-24 w-full relative overflow-y-auto">
           <div className="flex items-center justify-between mb-4">
             <NavigationTabs
               tabs={tabs}
@@ -106,7 +105,7 @@ const OrganizationManagement: React.FC = () => {
             </button>
           </div>
 
-          <Card className="bg-white shadow-md rounded-lg p-4 mb-4">
+          <Card className="bg-white rounded-lg p-4 mb-4">
             <CardContent>
               <div className="flex items-center justify-between mb-2">
                 <h1 className="text-xl md:text-2xl font-bold">
@@ -121,9 +120,11 @@ const OrganizationManagement: React.FC = () => {
                 </Button>
               </div>
               <p className="text-gray-500 text-sm mb-4">
-              List of Organizations to feedbacks
+                List of Organizations to feedbacks
               </p>
-              <div className="flex gap-4 grid grid-cols-3">
+
+              {/* Make the container scrollable and hide the scrollbar */}
+              <div className="flex gap-4 grid grid-cols-3 overflow-y-auto max-h-[60vh] scrollbar-hide">
                 {filteredOrganizations.map((org) => (
                   <OrganizationCard
                     key={org.name}
