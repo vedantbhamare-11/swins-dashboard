@@ -9,6 +9,8 @@ import FeedbackTable from "@/components/FeedbackTable";
 import LeaderboardTable from "@/components/LeaderboardTable";
 import Header from "@/components/Header"; // Import Header component
 import Sidebar from "@/components/Sidebar"; // Import Sidebar component
+import AddUserModal from "@/components/AddUserModal"; // Import AddUserModal
+import { Button } from "@/components/ui/button";
 
 const OrganizationDetailPage: React.FC = () => {
   const { orgName } = useParams(); // Capture the org name from the URL
@@ -17,9 +19,13 @@ const OrganizationDetailPage: React.FC = () => {
   );
 
   const [activeTab, setActiveTab] = useState("user");
+  const [showModal, setShowModal] = useState(false);
+  const [newUser, setNewUser] = useState({ name: "", email: "", role: "User" });
 
   // Ensure orgName is a string (in case it's an array)
-  const decodedOrgName = decodeURIComponent(Array.isArray(orgName) ? orgName[0] : orgName);
+  const decodedOrgName = decodeURIComponent(
+    Array.isArray(orgName) ? orgName[0] : orgName
+  );
 
   // Find the selected organization from the list using the decoded orgName
   const selectedOrg = organizations.find((org) => org.name === decodedOrgName);
@@ -28,6 +34,21 @@ const OrganizationDetailPage: React.FC = () => {
   if (!selectedOrg) {
     return <div>Organization not found</div>;
   }
+
+  // Handle input change in the modal
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setNewUser({ ...newUser, [name]: value });
+  };
+
+  // Handle adding a new user (this will just close the modal in this case)
+  const handleAddUser = () => {
+    // Reset form and close the modal
+    setNewUser({ name: "", email: "", role: "User" });
+    setShowModal(false);
+  };
 
   const tabs = [
     { label: "User", value: "user" },
@@ -41,7 +62,9 @@ const OrganizationDetailPage: React.FC = () => {
       case "user":
         return <UserTable users={selectedOrg.users} />;
       case "feedback":
-        return <FeedbackTable feedbacks={selectedOrg.feedbacks} searchQuery="" />;
+        return (
+          <FeedbackTable feedbacks={selectedOrg.feedbacks} searchQuery="" />
+        );
       case "leaderboard":
         return <LeaderboardTable data={selectedOrg.leaderboard} />;
       default:
@@ -55,12 +78,24 @@ const OrganizationDetailPage: React.FC = () => {
       <div className="flex h-screen">
         <Sidebar /> {/* Include the Sidebar */}
         <div className="p-4 md:p-6 w-full relative bg-[#F8F8F8] overflow-y-auto">
-          
-
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold">{selectedOrg.name}</h2>
-            <p className="text-sm text-gray-600">{selectedOrg.orgDescription}</p>
+          <div className="flex flex-row justify-between">
+            <div className="flex flex-col  mb-4 space-y-2 md:space-y-0">
+              <h2 className="text-2xl font-bold">{selectedOrg.name}</h2>
+              <p className="text-sm text-gray-600">{selectedOrg.type}</p>
+            </div>
+            <div>
+              {/* Add User Button (Only in the User Tab) */}
+              {activeTab === "user" && (
+                <Button
+                  onClick={() => setShowModal(true)}
+                  className="bg-[#1E1E1E] text-white"
+                >
+                  Add User
+                </Button>
+              )}
+            </div>
           </div>
+
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 space-y-2 md:space-y-0">
             <NavigationTabs
               tabs={tabs}
@@ -71,6 +106,21 @@ const OrganizationDetailPage: React.FC = () => {
 
           {/* Render the tab content (user table, feedback table, or leaderboard) */}
           {getTabContent()}
+
+          {/* Show the Add User Modal */}
+          {showModal && (
+            <AddUserModal
+              showModal={showModal}
+              toggleModal={() => setShowModal(false)}
+              newUser={newUser}
+              handleInputChange={handleInputChange}
+              handleAddUser={handleAddUser} // Simply close the modal
+              resetUser={() =>
+                setNewUser({ name: "", email: "", role: "User" })
+              }
+              userList={selectedOrg.users}
+            />
+          )}
         </div>
       </div>
     </div>
