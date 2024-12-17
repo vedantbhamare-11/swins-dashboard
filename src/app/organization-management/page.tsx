@@ -123,7 +123,7 @@ const OrganizationManagement: React.FC = () => {
               <p className="text-gray-500 text-sm mb-4">
               List of Organizations to feedbacks
               </p>
-              <div className="flex gap-4 grid grid-cols-4">
+              <div className="flex gap-4 grid grid-cols-3">
                 {filteredOrganizations.map((org) => (
                   <OrganizationCard
                     key={org.name}

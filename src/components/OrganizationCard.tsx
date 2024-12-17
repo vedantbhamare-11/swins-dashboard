@@ -60,11 +60,11 @@ const OrganizationCard: React.FC<OrganizationCardProps> = ({
         </div>
       </div>
 
-      <div className="mt-2 w-full flex gap-2 items-center justify-center">
-        <span className="bg-gray-200 flex items-center justify-center w-1/2 text-gray-600 text-xs py-1 px-2 rounded-full">
+      <div className="mt-2 w-full flex gap-2">
+        <span className="bg-gray-200 flex w-auto text-gray-600 text-xs py-1 px-2 rounded-full">
           {organization.type}
         </span>
-        <span className="bg-gray-200 flex items-center justify-center w-1/2 text-gray-600 text-xs py-1 px-2 rounded-full">
+        <span className="bg-gray-200 flex  w-auto text-gray-600 text-xs py-1 px-2 rounded-full">
           {organization.postType}
         </span>
       </div>
