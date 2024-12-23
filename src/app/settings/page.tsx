@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { updateAdminDetail, updateProfilePic } from "@/redux/slices/adminDetailsSlice";
-import AccountSettings from "@/components/AccountSettings";
+import AccountSettings from "@/components/OrgAdminAccountSettings";
 import NavigationTabs from "@/components/NavigationTabs"; // Import NavigationTabs
 import NotificationSettings from "@/components/NotificationSettings"; // Import NotificationSettings
 import SecuritySettings from "@/components/SecuritySettings";
