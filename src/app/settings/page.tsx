@@ -3,16 +3,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
-import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { updateAdminDetail, updateProfilePic } from "@/redux/slices/adminDetailsSlice";
-import AccountSettings from "@/components/OrgAdminAccountSettings";
-import NavigationTabs from "@/components/NavigationTabs"; // Import NavigationTabs
-import NotificationSettings from "@/components/NotificationSettings"; // Import NotificationSettings
+import AccountSettings from "@/components/AccountSettings";
+import NavigationTabs from "@/components/NavigationTabs"; 
+import NotificationSettings from "@/components/NotificationSettings";
 import SecuritySettings from "@/components/SecuritySettings";
 import AppearanceSettings from "@/components/AppearanceSettings";
-import AdminAccountSettings from "@/components/AdminAccountSettings"; // Import the new component
+import AdminAccountSettings from "@/components/AdminAccountSettings";
 
 const Settings: React.FC = () => {
   const [activeTab, setActiveTab] = useState("account");
@@ -106,14 +105,10 @@ const Settings: React.FC = () => {
           />
           {activeTab === "account" && (
             <>
-              <AccountSettings
-                formData={formData}
-                selectedImage={profilePic}
-                handleInputChange={handleInputChange}
-                handleSelectChange={handleSelectChange}
-                handleFileChange={handleFileChange}
-                handleSaveSettings={handleSaveSettings}
-              />
+            <div className="mt-4">
+             <AccountSettings />
+            </div>
+
               {/* New Component added below */}
               {/* Hidden by default */}
               {/* <AdminAccountSettings

@@ -9,11 +9,11 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import { RootState } from "@/redux/store";
+import { RootState } from "@/redux/store"; // Adjust this import to match your Redux store structure
 import { useSelector } from "react-redux";
 
 
-const OrgAdminAccountSettings: React.FC = () => {
+const AccountSettings: React.FC = () => {
   const organizations = useSelector((state: RootState) => state.organizationManagement.organizations);
 
   const [selectedOrg] = useState(organizations[0] || {});
@@ -306,4 +306,4 @@ const OrgAdminAccountSettings: React.FC = () => {
   );
 };
 
-export default OrgAdminAccountSettings;
+export default AccountSettings;
